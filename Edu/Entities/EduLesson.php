@@ -33,6 +33,7 @@ class EduLesson extends Model
         'download_address',
         'user_id',
         'rank',
+        'only_down'
     ];
 
     public function scopeType($query, $type)

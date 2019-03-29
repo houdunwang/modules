@@ -28,6 +28,13 @@
                                             删除
                                         </button>
                                     @endcan
+                                    @if ($lesson->download_address)
+                                        @include('edu::front.layouts.download',['lesson'=>$lesson])
+                                        <a href="" class="btn btn-outline-info"
+                                           data-toggle="modal" data-target="#downloadModal">
+                                            下载高清版
+                                        </a>
+                                    @endif
                                 </div>
                                 @include('components.favorite',['model'=>$lesson])
                             </div>

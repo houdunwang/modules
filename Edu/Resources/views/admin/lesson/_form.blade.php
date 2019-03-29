@@ -1,8 +1,8 @@
 {{--后台发表课程--}}
 @inject('TagRepository','Modules\Edu\Repositories\TagRepository')
 <div class="row">
-    @include('edu::admin.lesson._tab')
     <div class="col-12" id="app" v-cloak="">
+        @include('edu::admin.lesson._tab')
         <div class="card">
             <div class="card-header">基本信息</div>
             <div class="card-body border-bottom-0">
@@ -49,32 +49,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">课程图片</label>
-                    <div class="col-sm-10">
-                        <div class="input-group mb-1">
-                            <input class="form-control form-control" readonly="" name="thumb"
-                                   value="{{old('thumb',$lesson['thumb']??'')}}">
-                            <div class="input-group-append">
-                                <button onclick="upload_image('thumb')" class="btn btn-secondary" type="button">
-                                    选择图片
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <img src="{{old('thumb',$lesson['thumb']??asset('images/system/nopic.jpg'))}}"
-                                 class="img-responsive img-thumbnail" width="150">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">下载地址</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="download_address"
-                               value="{{old('download_address',$lesson['download_address']??'')}}">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2">状态</label>
+                    <label class="col-sm-2">课程状态</label>
                     <div class="col-sm-10">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="status1" name="status" value="1" class="custom-control-input"
@@ -106,19 +81,49 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2">收费方式</label>
+                    <label class="col-sm-2 col-form-label">课程图片</label>
                     <div class="col-sm-10">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="free1" name="free" value="1"
-                                   class="custom-control-input"
-                                    {{active_class(old('free',$lesson['free']??1)==1,'checked')}}>
-                            <label class="custom-control-label" for="free1">免费</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control form-control" readonly="" name="thumb"
+                                   value="{{old('thumb',$lesson['thumb']??'')}}">
+                            <div class="input-group-append">
+                                <button onclick="upload_image('thumb')" class="btn btn-secondary" type="button">
+                                    选择图片
+                                </button>
+                            </div>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="free2" name="free" value="0"
-                                   class="custom-control-input"
-                                    {{active_class(old('free',$lesson['free']??1)==0,'checked')}}>
-                            <label class="custom-control-label" for="free2">收费</label>
+                        <div class="mt-2">
+                            <img src="{{old('thumb',$lesson['thumb']??asset('images/system/nopic.jpg'))}}"
+                                 class="img-responsive img-thumbnail" width="150">
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        下载设置
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2">只允许下载</label>
+                            <div class="col-sm-10">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="only_down1" name="only_down" value="1" class="custom-control-input"
+                                            {{active_class(old('only_down',$lesson['only_down']??0)==1,'checked')}}>
+                                    <label class="custom-control-label" for="only_down1">是</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="only_down2" name="only_down" value="0" class="custom-control-input"
+                                            {{active_class(old('only_down',$lesson['only_down']??0)==0,'checked')}}>
+                                    <label class="custom-control-label" for="only_down2">否</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">下载地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="download_address"
+                                       value="{{old('download_address',$lesson['download_address']??'')}}">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,6 +132,23 @@
                         收费课程设置
                     </div>
                     <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2">收费方式</label>
+                            <div class="col-sm-10">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="free1" name="free" value="1"
+                                           class="custom-control-input"
+                                            {{active_class(old('free',$lesson['free']??1)==1,'checked')}}>
+                                    <label class="custom-control-label" for="free1">免费</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="free2" name="free" value="0"
+                                           class="custom-control-input"
+                                            {{active_class(old('free',$lesson['free']??1)==0,'checked')}}>
+                                    <label class="custom-control-label" for="free2">收费</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">课程售价</label>
                             <div class="col-sm-10">

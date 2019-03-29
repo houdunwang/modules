@@ -17,7 +17,7 @@ class TagController extends Controller
 {
     public function show(EduTag $tag)
     {
-        $lessons = $tag->lesson()->paginate(10);
+        $lessons = $tag->lesson()->paginate(2);
         return view('edu::front.lesson.index', compact('lessons'));
     }
 }

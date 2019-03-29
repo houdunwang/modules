@@ -29,7 +29,7 @@ class LessonController extends Controller
      */
     public function tag(EduTag $tag)
     {
-        $lessons = $tag->lesson()->latest('is_commend')->latest('updated_at')->paginate(10);
+        $lessons = $tag->lesson()->latest('is_commend')->latest('updated_at')->paginate(12);
         return view('edu::front.lesson.index', compact('lessons'));
     }
 
