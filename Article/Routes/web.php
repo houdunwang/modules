@@ -11,6 +11,7 @@ Route::group([
     'middleware' => ['module'],
 ], function () {
     Route::resource('model', 'ModelController');
+    Route::resource('category', 'CategoryController');
 });
 /*
 |--------------------------------------------------------------------------
