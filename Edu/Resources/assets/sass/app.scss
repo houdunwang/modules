@@ -1,0 +1,140 @@
+@import "components";
+
+.edu {
+  background-color: #f0f2f5 !important;
+
+  .header {
+    border-width: 4px !important;
+  }
+
+  .avatar {
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    display: inline-block;
+  }
+
+  .avatar-small {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    display: inline-block;
+  }
+
+  .edu-front-topic-show {
+    .content-markdown {
+      min-height: 300px;
+
+      img {
+        max-width: 100%;
+      }
+
+      @media screen and (min-width: 600px) {
+        pre {
+          margin-left: -45px;
+          margin-right: -45px;
+          padding: 20px 20px 20px 45px;
+        }
+      }
+    }
+  }
+
+  .edu-front-topic-edit, .edu-front-topic-create {
+    .content {
+      min-height: 380px;
+    }
+  }
+
+  .edu-front-sign-index {
+    .moods {
+      list-style: none;
+      padding: 0;
+
+      li {
+        &.active {
+          border: solid 5px #d64141;
+        }
+
+        float: left;
+        border: solid 5px #eae8e8;
+        margin-right: 10px;
+        padding: 5px 6px 2px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: #f3f3f3;
+
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .edu-front-lesson-index, .edu-front-lesson-tag {
+    .lessons {
+      .card-body.thumb {
+        overflow: hidden;
+        height: 160px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .title {
+        height: 65px;
+      }
+    }
+  }
+
+  .edu-front-video-show {
+    overflow: hidden;
+    position: relative;
+
+    .video-box {
+      @media screen and(min-width: 600px) {
+        height: 650px;
+      }
+      @media screen and(max-width: 600px) {
+        height: 250px;
+      }
+    }
+  }
+
+  //会员订阅
+  .edu-front-subscribe-index {
+    .subscribe-header {
+      background-image: linear-gradient(150deg, #2d1582 0%, #19a0ff 100%);
+      background-repeat: repeat-x;
+      height: 380px;
+      padding: 20px;
+
+      h1 {
+        font-size: 4rem;
+        opacity: .9;
+      }
+
+      h2 {
+        font-size: 2rem;
+        opacity: .6;
+      }
+    }
+  }
+
+  .pay {
+    margin-top: -55px;
+
+    .item {
+      background-image: linear-gradient(150deg, #e4e8da 0%, #ffffff 100%);
+
+      .price {
+        text-shadow: 0 0 10px #dddddd;
+
+        small {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

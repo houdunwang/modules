@@ -1,0 +1,15 @@
+{
+    "name": "Document",
+    "alias": "document",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Document\\Providers\\DocumentServiceProvider",
+        "Modules\\Document\\Providers\\AuthServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

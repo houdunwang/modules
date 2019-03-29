@@ -1,0 +1,39 @@
+.document-front-content-show {
+  .markdown {
+    min-height: 300px;
+    @media screen and (min-width: 600px) {
+      pre {
+        margin-left: -45px;
+        margin-right: -45px;
+        padding: 20px 20px 20px 45px;
+      }
+    }
+  }
+}
+
+.article-menu{
+  ul{
+    margin: 0;
+    padding-left: 20px;
+    list-style: none;
+    line-height: 2em;
+  }
+}
+
+ul.markdown-toc {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+  line-height: 2em;
+  li a {
+    font-size: 15px;
+    &.h3,&.h4{
+      margin-left: 2em;
+      font-weight: normal;
+    }
+    &.h1,&.h2{
+      margin-top: 2em;
+      font-weight: normal;
+    }
+  }
+}

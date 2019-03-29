@@ -1,2 +1,3 @@
-# modules
-HDCMS 官方模块
+# HDCMS Modules
+
+为HDCMS开发的模块
