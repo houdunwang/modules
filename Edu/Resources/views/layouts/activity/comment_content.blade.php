@@ -6,8 +6,8 @@
             </a>
             <div class="media-body pb-3 mb-0 small lh-125 pl-3">
                 <h6 class="">
-                    <a href="{{ $activity->subject->getActivityLink() }}">
-                        {!! $activity->subject->getActivityTitle() !!}
+                    <a href="{{ $activity->subject->getLink() }}">
+                        发表评论 {!! $activity->subject->getTitle() !!}
                     </a>
                 </h6>
                 <div>

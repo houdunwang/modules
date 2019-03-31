@@ -41,8 +41,10 @@ Route::group([
     //主页
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('topic', 'TopicController');
+    Route::get('topic-recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
     Route::resource('sign', 'SignController');
     Route::resource('lesson', 'LessonController');
+    Route::get('lesson-recommend/{lesson}', 'LessonController@recommend')->name('lesson.recommend');
     Route::get('tag/{tag}', 'LessonController@tag')->name('lesson.tag');
     Route::resource('video', 'VideoController');
     Route::get('setup', 'LessonController@setup');

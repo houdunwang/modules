@@ -7,17 +7,16 @@
             </a>
             <div class="media-body pb-3 mb-0 small lh-125 pl-3">
                 <h6 class="">
-                    <a href="{{$activity->subject->getLink()}}"
+                    <a href="{{$activity->subject->belongModel->getLink()}}"
                        class="topic-title pb-2 d-inline-block activity-title font-size-15">
-                        {{$activity->description=='updated'?'更新了':'发表了'}}{{$activity->subject->getTitle()}}
+                        收藏了{{$activity->subject->belongModel->getTitle()}}
                     </a>
                 </h6>
                 <div>
-                    <span class="badge badge-info font-weight-light">课程</span>
+                    <span class="badge badge-info font-weight-light">收藏</span>
                     <span class="small font-weight-light">
-                    {{$activity->description=='updated'?'更新':'发表'}}
-                        于 {{$activity['updated_at']->diffForHumans()}}
-                    </span> .
+                        操作于 {{$activity['updated_at']->diffForHumans()}}
+                    </span>
                 </div>
             </div>
         </div>

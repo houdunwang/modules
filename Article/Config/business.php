@@ -10,5 +10,10 @@
             'url' => module_link('article.admin.category.index'),
             'permission' => 'module-manage',
         ],
+        [
+            'title' => '内容管理',
+            'url' => module_link('article.admin.content.index'),
+            'permission' => 'content-manage',
+        ],
     ],
 ];

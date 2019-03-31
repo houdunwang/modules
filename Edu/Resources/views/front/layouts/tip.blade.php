@@ -8,10 +8,10 @@
     <div class="card-footer text-muted bg-white text-center">
         <div class="d-flex justify-content-between">
             <a href="{{route('edu.front.topic.create')}}" class="btn btn-outline-success btn-sm flex-fill">
-                <i class="fa fa-whatsapp"></i> 发贴交流
+                <i class="fa fa-pencil-square-o"></i> 发贴交流
             </a>
-            <a href="{{route('edu.front.sign.index')}}" class="btn btn-outline-danger btn-sm flex-fill ml-2">
-                <i class="fa fa-whatsapp"></i> 签到打卡
+            <a href="{{route('edu.front.sign.index')}}" class="btn btn-outline-info btn-sm flex-fill ml-2">
+                <i class="fa fa-flag-o"></i> 签到打卡
             </a>
         </div>
     </div>

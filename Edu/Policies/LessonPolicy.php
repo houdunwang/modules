@@ -20,8 +20,12 @@ class LessonPolicy
         return is_super_admin() || $user['id'] == $lesson['user_id'];
     }
 
+    public function recommend(User $user, EduLesson $lesson)
+    {
+        return is_site_manage();
+    }
+
     public function __construct()
     {
-        //
     }
 }

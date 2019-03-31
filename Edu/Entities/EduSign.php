@@ -16,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class EduSign extends Model
 {
-    use Site, Favour, LogsActivity, ActivityRecord;
+    use Site, LogsActivity;
     protected $fillable = ['content', 'mood', 'user_id', 'site_id'];
     protected static $recordEvents = ['created'];
     //全站动态
@@ -31,32 +31,13 @@ class EduSign extends Model
         return $this->hasOne(EduSignTotal::class, 'user_id', 'user_id');
     }
 
-    /**
-     * 用户关联
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getActivityLink()
+    public function getLink()
     {
         return route('edu.front.sign.index');
     }
 
-    public function getActivityTitle()
+    public function getTitle()
     {
         return '完成签到 '.$this['content'];
-    }
-
-    /**
-     * 点赞
-     * @return bool
-     */
-    public function favourUpdate()
-    {
-        $this['favour_count'] = $this->favourCount();
-        return $this->save();
     }
 }

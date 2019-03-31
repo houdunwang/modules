@@ -66,7 +66,7 @@
                                         编辑
                                     </a>
                                     <a class="btn btn-outline-secondary"
-                                       href="{{route('edu.admin.lesson.show',$lesson)}}" target="_blank">
+                                       href="{{route('edu.front.lesson.show',$lesson)}}" target="_blank">
                                         查看
                                     </a>
                                     <form action="{{route('edu.admin.lesson.destroy',$lesson)}}" method="post">

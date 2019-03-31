@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduTag;
@@ -11,6 +12,8 @@ use Modules\Edu\Repositories\VideoRepository;
 
 class LessonController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * 课程列表
      * @param LessonRepository $repository
@@ -43,5 +46,13 @@ class LessonController extends Controller
     {
         $videos = $videoRepository->getALlByLesson($lesson);
         return view('edu::front.lesson.show', compact('lesson', 'videos'));
+    }
+
+    public function recommend(EduLesson $lesson)
+    {
+        $this->authorize('recommend', $lesson);
+        $lesson['is_commend'] = !$lesson['is_commend'];
+        $lesson->save();
+        return back();
     }
 }

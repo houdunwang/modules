@@ -54,6 +54,7 @@ class LessonRepository extends Repository
         foreach ($videos as $rank => $video) {
             $video['rank'] = $rank;
             $video['site_id'] = site()['id'];
+            $video['user_id'] = auth()->id();
             $lesson->video()->updateOrCreate(['id' => $video['id'] ?? 0], $video);
         }
         $lesson['video_num'] = $lesson->video->count();

@@ -28,13 +28,19 @@
                                             删除
                                         </button>
                                     @endcan
-                                    @if ($lesson->download_address)
-                                        @include('edu::front.layouts.download',['lesson'=>$lesson])
-                                        <a href="" class="btn btn-outline-info"
-                                           data-toggle="modal" data-target="#downloadModal">
-                                            下载高清版
-                                        </a>
-                                    @endif
+                                    @can('recommend',$lesson)
+                                            <a href="{{route('edu.front.lesson.recommend',$lesson)}}"
+                                               class="btn {{$lesson['is_commend']?'btn-outline-success':'btn-outline-secondary'}}">
+                                                推荐
+                                            </a>
+                                    @endcan
+{{--                                    @if ($lesson->download_address)--}}
+{{--                                        @include('edu::front.layouts.download',['lesson'=>$lesson])--}}
+{{--                                        <a href="" class="btn btn-outline-info"--}}
+{{--                                           data-toggle="modal" data-target="#downloadModal">--}}
+{{--                                            下载高清版--}}
+{{--                                        </a>--}}
+{{--                                    @endif--}}
                                 </div>
                                 @include('components.favorite',['model'=>$lesson])
                             </div>

@@ -11,7 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class EduLesson extends Model
 {
-    use Site, Favour, Favorite, LogsActivity, ActivityRecord;
+    use Site, LogsActivity;
     protected static $recordEvents = ['created', 'updated'];
     protected static $logName = 'edu_lesson';
     protected $fillable = [
@@ -33,7 +33,7 @@ class EduLesson extends Model
         'download_address',
         'user_id',
         'rank',
-        'only_down'
+        'only_down',
     ];
 
     public function scopeType($query, $type)
@@ -62,30 +62,10 @@ class EduLesson extends Model
     }
 
     /**
-     * 系统会在点赞动作后执行这个方法
-     * @return bool
-     */
-    public function favourUpdate()
-    {
-        $this['favour_num'] = $this->favourCount();
-        return $this->save();
-    }
-
-    /**
-     * 收藏动作后执行这个方法
-     * @return bool
-     */
-    public function favoriteUpdate()
-    {
-        $this['favorite_num'] = $this->favoriteCount();
-        return $this->save();
-    }
-
-    /**
      * 动态链接
      * @return string
      */
-    public function getActivityLink()
+    public function getLink()
     {
         return route('edu.front.lesson.show', $this);
     }
@@ -94,8 +74,8 @@ class EduLesson extends Model
      * 动态标题
      * @return string
      */
-    public function getActivityTitle()
+    public function getTitle()
     {
-        return '更新了课程《' . mb_substr($this['title'], 0, 80, 'utf-8') . '》新技能等你GET';
+        return "课程《" . mb_substr($this['title'], 0, 80, 'utf-8') . '》';
     }
 }

@@ -29,4 +29,9 @@ class EduTopicPolicy
     {
         return $user['id'] == $topic['id'] || is_site_manage();
     }
+
+    public function recommend(User $user, EduTopic $topic)
+    {
+        return is_site_manage();
+    }
 }

@@ -13,9 +13,9 @@
     </li>
     @if (if_route('article.admin.category.edit'))
         <li class="nav-item">
-            <a class="nav-link {{active_class(if_route('article.admin.category.edit'),'active')}}"
+            <a class="nav-link active"
                href="#">
-                添加栏目
+                编辑栏目
             </a>
         </li>
     @endif

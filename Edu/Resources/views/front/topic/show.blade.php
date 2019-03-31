@@ -19,6 +19,12 @@
                             </div>
                             <div class="float-right">
                                 <div class="btn-group btn-group-sm">
+                                    @can('recommend',$topic)
+                                        <a href="{{route('edu.front.topic.recommend',$topic)}}"
+                                           class="btn {{$topic['recommend']?'btn-outline-success':'btn-outline-secondary'}}">
+                                            推荐
+                                        </a>
+                                    @endcan
                                     @can('update',$topic)
                                         <a href="{{route('edu.front.topic.edit',$topic)}}"
                                            class="btn btn-outline-success">

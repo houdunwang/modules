@@ -16,10 +16,10 @@ use Modules\Comment\Traits\Comment;
  */
 class EduVideo extends Model
 {
-    use Site, Favorite, Favour, Comment;
+    use Site, Comment;
 
     protected $fillable =
-        ['id', 'title', 'path', 'question', 'lesson_id', 'external_address', 'rank','site_id'];
+        ['id', 'title', 'path', 'question', 'lesson_id', 'external_address', 'rank', 'site_id','user_id'];
     /**
      * 字段转换
      * @var array
@@ -40,15 +40,6 @@ class EduVideo extends Model
     public function lesson()
     {
         return $this->belongsTo(EduLesson::class);
-    }
-
-    /**
-     * 用户关联
-     * @return mixed
-     */
-    public function user()
-    {
-        return $this->lesson->user();
     }
 
     public function userVideo()
@@ -76,6 +67,6 @@ class EduVideo extends Model
      */
     public function getTitle()
     {
-        return mb_substr($this['title'], 0, 80, 'utf-8');
+        return "视频《" .mb_substr($this['title'], 0, 80, 'utf-8')."》";
     }
 }

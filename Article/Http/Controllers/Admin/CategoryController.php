@@ -5,24 +5,33 @@ namespace Modules\Article\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Article\Entities\ArticleCategory;
+use Modules\Article\Http\Requests\CategoryRequest;
 use Modules\Article\Repositories\CategoryRepository;
+use Modules\Article\Repositories\ModelRepository;
 
 class CategoryController extends Controller
 {
-    public function index(CategoryRepository $repository)
+    public function index(CategoryRepository $repository, ModelRepository $modelRepository)
     {
-        $categories = $repository->all();
+        if (!$modelRepository->count()) {
+            return redirect(module_link('article.admin.model.index'))->with('error', '请先设置模型');
+        }
+        $categories = $repository->tree();
         return view('article::admin.category.index', compact('categories'));
     }
 
-    public function create()
+    public function create(CategoryRepository $repository, ModelRepository $modelRepository)
     {
-        return view('article::admin.category.create');
+        $categories = $repository->tree();
+        $models = $modelRepository->all();
+        return view('article::admin.category.create', compact('categories', 'models'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request, CategoryRepository $repository)
     {
-        //
+        $repository->create($request->input());
+        return redirect(module_link('article.admin.category.index'))->with('success', '栏目添加成功');
     }
 
     public function show($id)
@@ -30,23 +39,22 @@ class CategoryController extends Controller
         return view('article::show');
     }
 
-    public function edit($id)
+    public function edit(ArticleCategory $category, CategoryRepository $repository, ModelRepository $modelRepository)
     {
-        return view('article::edit');
+        $categories = $repository->tree($category);
+        $models = $modelRepository->all();
+        return view('article::admin.category.edit', compact('category', 'categories','models'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, ArticleCategory $category)
     {
-        //
+        $category->update($request->input());
+        return redirect(module_link('article.admin.category.index'))->with('success', '栏目添加成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
+    public function destroy(ArticleCategory $category, CategoryRepository $repository)
     {
-        //
+        $repository->delete($category);
+        return redirect(module_link('article.admin.category.index'))->with('success', '删除成功');
     }
 }

@@ -7,9 +7,10 @@
             </a>
             <div class="media-body pb-3 mb-0 small lh-125 pl-3">
                 <h6 class="">
-                    <a href="{{$activity->subject->getActivityLink()}}"
+                    <a href="{{$activity->subject->getLink()}}"
                        class="topic-title pb-2 d-inline-block activity-title font-size-15">
-                        {{$activity->subject->getActivityTitle()}}
+                        {{$activity->description=='updated'?'更新了贴子':'发表了贴子'}}
+                        《{{$activity->subject->getTitle()}}》
                     </a>
                 </h6>
                 <div>

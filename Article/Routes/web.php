@@ -12,6 +12,7 @@ Route::group([
 ], function () {
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
+    Route::resource('content', 'ContentController');
 });
 /*
 |--------------------------------------------------------------------------

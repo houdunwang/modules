@@ -33,15 +33,11 @@ class UserVideoRepository extends Repository
      */
     public function record(EduVideo $video, User $user)
     {
-        $has = $this->instance->where('video_id', $video['id'])->first();
-
-        if (!$has) {
-            $video->userVideo()->create([
-                'lesson_id' => $video['lesson_id'],
-                'user_id' => auth()->id(),
-                'site_id' => \site()['id'],
-            ]);
-        }
+        $video->userVideo()->updateOrCreate([
+            'lesson_id' => $video['lesson_id'],
+            'user_id' => auth()->id(),
+            'site_id' => \site()['id'],
+        ], []);
         cache()->forget($this->cacheKey($video->lesson, $user));
         return true;
     }

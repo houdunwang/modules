@@ -4,6 +4,7 @@ namespace Modules\Comment\Entities;
 
 use App\Traits\ActivityRecord;
 use App\Traits\Favour;
+use App\Traits\Site;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Content extends Model
 {
-    use LogsActivity, ActivityRecord, Favour;
+    use Site, LogsActivity;
     protected $table = 'comment_contents';
     protected $fillable = ['user_id', 'comment_content', 'site_id', 'module_id', 'favour_count'];
     protected static $logAttributes = ['title', 'author_id'];
@@ -39,18 +40,19 @@ class Content extends Model
 
     public function favourUpdate()
     {
-        $this['favour_count'] = $this->favourCount();
-        return $this->save();
+        \DB::table($this->getTable())->where('id', $this['id'])->update([
+            'favour_count' => $this->favourCount(),
+        ]);
     }
 
     //返回当前模型的链接
-    public function getActivityLink()
+    public function getLink()
     {
         return $this->relation->getLink() . '#' . $this->id;
     }
 
-    public function getActivityTitle()
+    public function getTitle()
     {
-        return '发表评论 '.mb_substr(strip_tags((new \Parsedown())->text($this['comment_content'])),0,55);
+        return mb_substr(strip_tags((new \Parsedown())->text($this['comment_content'])), 0, 55);
     }
 }

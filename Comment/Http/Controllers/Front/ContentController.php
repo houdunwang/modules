@@ -2,7 +2,7 @@
 
 namespace Modules\Comment\Http\Controllers\Front;
 
-use Houdunwang\WeChat\Build\Cache;
+use App\Notifications\UserNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -31,14 +31,19 @@ class ContentController extends Controller
         if (\Cache::add($key, $time, $time)) {
             $class = $request->input('comment_type');
             $model = (new $class)->find($request->input('comment_id'));
-            $model->comments()->create([
+            $comment = $model->comments()->create([
                 'site_id' => \site()['id'],
                 'module_id' => \module()['id'],
                 'comment_content' => $request->input('comment_content'),
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
             ]);
             $model->commentCreated();
-            return ['message' => '评论发表成功', 'code' => 0];
+            $model->user->notify(new UserNotification(['message' => '你有新的评论', 'url' => $comment->getLink()]));
+            return [
+                'message' => '评论发表成功',
+                'code' => 0,
+                'view' => view('comment::layouts._comment', compact('comment')).'',
+            ];
         }
         $diffSecond = now()->diffInSeconds(\Cache::get($key));
         return response()->json(['message' => "请{$diffSecond}秒后操作", 'code' => 40], 403);

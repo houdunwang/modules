@@ -1,21 +1,23 @@
 @extends('edu::layouts.master')
 @section('content')
     @include('components.login')
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mt-3 shadow-sm p-5 bg-light rounded">
-                    <div class="card-body text-center">
-                        <a href="" class="h4 card-title btn btn-info btn-lg"
-                           data-toggle="modal" data-target="#downloadModal">
-                            请下载观看高清版
-                        </a>
-                        @include('edu::front.layouts.download',['lesson'=>$video->lesson])
+    @if ($video->lesson['only_down'])
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mt-3 shadow-sm p-5 bg-light rounded">
+                        <div class="card-body text-center">
+                            <a href="" class="h4 card-title btn btn-info btn-lg"
+                               data-toggle="modal" data-target="#downloadModal">
+                                请下载观看高清版
+                            </a>
+                            @include('edu::front.layouts.download',['lesson'=>$video->lesson])
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     @unless($video->lesson['only_down'])
         <div style="background: #313847">
             <div class="container">
@@ -41,7 +43,6 @@
                                     <script>
                                         require(['hdjs'], function (hdjs) {
                                             hdjs.video('video');
-                                            hdjs.scrollTo('body', '#video', 1000, {queue: true});
                                         });
                                     </script>
                                 @endpush

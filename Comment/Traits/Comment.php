@@ -13,13 +13,23 @@ use Modules\Comment\Entities\Content;
 
 trait Comment
 {
+    /**
+     * 评论关联
+     * @return mixed
+     */
     public function comments()
     {
         return $this->morphMany(Content::class, 'comment');
     }
 
+    /**
+     * 系统会在点赞动作后执行这个方法
+     * @return bool
+     */
     public function commentCreated()
     {
-
+        \DB::table($this->getTable())->where('id', $this['id'])->update([
+            'comment_num' => $this->comments()->count(),
+        ]);
     }
 }

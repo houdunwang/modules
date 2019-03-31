@@ -78,4 +78,12 @@ class TopicController extends Controller
         \DB::commit();
         return redirect(route('edu.front.topic.index'))->with('success', '删除成功');
     }
+
+    public function recommend(EduTopic $topic)
+    {
+        $this->authorize('recommend', $topic);
+        $topic['recommend'] = !$topic['recommend'];
+        $topic->save();
+        return back();
+    }
 }

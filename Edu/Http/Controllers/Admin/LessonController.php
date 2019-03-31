@@ -25,7 +25,7 @@ class LessonController extends Controller
      */
     public function index(LessonRepository $repository)
     {
-        $lessons = $repository->paginate(15, ['*'], 'updated_at');
+        $lessons = EduLesson::latest('id')->paginate(15);
         return view('edu::admin.lesson.index', compact('lessons'));
     }
 

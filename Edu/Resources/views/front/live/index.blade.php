@@ -24,10 +24,3 @@
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        require(['hdjs'], function (hdjs) {
-            hdjs.scrollTo('body', '#live', 1000, {queue: true});
-        });
-    </script>
-@endpush
