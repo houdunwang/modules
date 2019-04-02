@@ -311,7 +311,7 @@
                     draggable: draggable
                 },
                 data: {
-                    videos: {!! json_encode($lesson->video->toArray()) !!},
+                    videos: {!! json_encode($lesson->video()->orderBy('rank','ASC')->get()->toArray()) !!},
                     editLessonVideo: false,
                 },
                 methods: {

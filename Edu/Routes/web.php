@@ -69,4 +69,8 @@ Route::group([
 ], function () {
     Route::get('activity', 'UserController@activity')->name('activity');
     Route::get('topic', 'UserController@topic')->name('topic');
+    Route::get('favorite', 'UserController@favorite')->name('favorite');
+    Route::get('lesson', 'UserController@lesson')->name('lesson');
+    Route::get('follower', 'UserController@follower')->name('follower');
+    Route::get('fans', 'UserController@fans')->name('fans');
 });

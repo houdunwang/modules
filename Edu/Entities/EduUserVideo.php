@@ -22,6 +22,11 @@ class EduUserVideo extends Model
         return $this->belongsTo(EduVideo::class, 'video_id', 'id');
     }
 
+    public function lesson()
+    {
+        return $this->belongsTo(EduLesson::class, 'lesson_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

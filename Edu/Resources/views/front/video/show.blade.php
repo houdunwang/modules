@@ -71,6 +71,18 @@
                             </a>
                         @endif
                         <div class="btn-group btn-group-sm">
+                            @if ($prevVideo = $video->prevVideo)
+                                <a href="{{route('edu.front.video.show',$prevVideo)}}"
+                                   class="btn btn-outline-success">
+                                    上一课
+                                </a>
+                            @endif
+                            @if ($nextVideo = $video->nextVideo)
+                                <a href="{{route('edu.front.video.show',$nextVideo)}}"
+                                   class="btn btn-outline-success">
+                                    下一课
+                                </a>
+                            @endif
                             @can('update',$video->lesson)
                                 <a href="{{route('edu.admin.lesson.edit',$video->lesson)}}"
                                    class="btn btn-outline-success">

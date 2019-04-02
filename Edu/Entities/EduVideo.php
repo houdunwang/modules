@@ -19,7 +19,7 @@ class EduVideo extends Model
     use Site, Comment;
 
     protected $fillable =
-        ['id', 'title', 'path', 'question', 'lesson_id', 'external_address', 'rank', 'site_id','user_id'];
+        ['id', 'title', 'path', 'question', 'lesson_id', 'external_address', 'rank', 'site_id', 'user_id'];
     /**
      * 字段转换
      * @var array
@@ -67,6 +67,31 @@ class EduVideo extends Model
      */
     public function getTitle()
     {
-        return "视频《" .mb_substr($this['title'], 0, 80, 'utf-8')."》";
+        return "视频《" . mb_substr($this['title'], 0, 80, 'utf-8') . "》";
+    }
+
+    public function scopeOrder($query, $by = 'ASC')
+    {
+        return $query->orderBy('rank', $by)->orderBy('id', $by);
+    }
+
+    public function getPrevVideoAttribute()
+    {
+        $videos = $this->lesson->video()->order('DESC')->get();
+        foreach ($videos as $key => $video) {
+            if ($video['id'] == $this['id']) {
+                return isset($videos[$key + 1]) ? $videos[$key + 1] : null;
+            }
+        }
+    }
+
+    public function getNextVideoAttribute()
+    {
+        $videos = $this->lesson->video()->order('DESC')->get();
+        foreach ($videos as $key => $video) {
+            if ($video['id'] == $this['id']) {
+                return isset($videos[$key - 1]) ? $videos[$key - 1] : null;
+            }
+        }
     }
 }
