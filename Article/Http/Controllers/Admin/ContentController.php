@@ -5,6 +5,10 @@ namespace Modules\Article\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Article\Entities\ArticleContent;
+use Modules\Article\Http\Requests\ContentRequest;
+use Modules\Article\Repositories\CategoryRepository;
+use Modules\Article\Repositories\ContentRepository;
 
 class ContentController extends Controller
 {
@@ -12,68 +16,39 @@ class ContentController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(ContentRepository $repository)
     {
-        return view('article::index');
+        $contents = $repository->paginate(10);
+        return view('article::admin.content.index', compact('contents'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function create(CategoryRepository $categoryRepository)
     {
-        return view('article::create');
+        $categories = $categoryRepository->tree();
+        return view('article::admin.content.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function store(ContentRequest $request, ContentRepository $repository)
     {
-        //
+        $repository->create($request->input());
+        return redirect(module_link('article.admin.content.index'))->with('success', '文章添加完成');
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
+    public function edit(ArticleContent $content, CategoryRepository $categoryRepository)
     {
-        return view('article::show');
+        $categories = $categoryRepository->tree();
+        return view('article::admin.content.edit', compact('content', 'categories'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
+    public function update(ContentRequest $request, ArticleContent $content, ContentRepository $repository)
     {
-        return view('article::edit');
+        $repository->update($content, $request->input());
+        return redirect(module_link('article.admin.content.index'))->with('success', '文章修改成功');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(ArticleContent $content)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $content->delete();
+        return redirect(module_link('article.admin.content.index'))->with('success', '删除成功');
     }
 }

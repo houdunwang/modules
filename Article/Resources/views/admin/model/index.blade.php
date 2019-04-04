@@ -21,6 +21,8 @@
                         <td>{{$model['name']}}</td>
                         <td class="text-right">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <a href="{{module_link('article.admin.field.index',$model)}}"
+                                   class="btn btn-outline-info">模型字段</a>
                                 <a href="{{module_link('article.admin.model.edit',$model)}}" class="btn btn-outline-success">编辑</a>
                                 <a href="" class="btn btn-outline-danger">删除</a>
                             </div>

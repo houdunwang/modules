@@ -13,6 +13,7 @@ Route::group([
     Route::resource('model', 'ModelController');
     Route::resource('category', 'CategoryController');
     Route::resource('content', 'ContentController');
+    Route::resource('{model}/field', 'FieldController');
 });
 /*
 |--------------------------------------------------------------------------

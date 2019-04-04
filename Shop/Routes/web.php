@@ -43,6 +43,8 @@ Route::group([
     Route::resource('module', 'ModuleController');
     Route::resource('log', 'LogController');
     Route::get('buy/{module}/module', 'BuyController@module')->name('buy.module');
+    //下载
+    Route::resource('download','DownController');
 });
 
 

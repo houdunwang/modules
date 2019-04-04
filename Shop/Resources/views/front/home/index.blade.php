@@ -13,7 +13,7 @@
                             并且100%开源免费可随便用在任何商业用途。
 
                         </p>
-                        <a href="http://edu.hdcms.com/hdcms.zip" class="btn btn-primary mr-2">下载软件</a>
+                        <a href="{{route('shop.front.download.index')}}" class="btn btn-primary mr-2">下载软件</a>
                         <a href="https://github.com/houdunwang/hdcms" class="btn btn-outline-success mr-2">查看源码</a>
                         <a href="http://doc.hdcms.com" class="btn btn-outline-primary">在线手册</a>
                     </div>

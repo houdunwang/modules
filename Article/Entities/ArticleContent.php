@@ -11,5 +11,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ArticleContent extends Model
 {
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'content',
+        'source',
+        'author',
+        'thumb',
+        'description',
+        'category_id',
+        'user_id',
+        'fields',
+        'site_id',
+    ];
+    protected $casts = [
+        'fields' => 'array',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(ArticleCategory::class);
+    }
 }
