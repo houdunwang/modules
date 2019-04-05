@@ -2,6 +2,7 @@
 
 namespace Modules\Document\Http\Controllers\Front;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -10,6 +11,8 @@ use Modules\Document\Repositories\ContentRepository;
 
 class ArticleController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         return view('document::index');

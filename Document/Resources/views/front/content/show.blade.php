@@ -20,6 +20,16 @@
                     <h5 class="pb-1 pt-3 mb-1 text-monospace text-black-50">
                         {{$content['title']}}
                     </h5>
+                    <div class="float-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            @can('update',$content->article)
+                                <div class="d-block">
+                                    <a href="{{module_link('document.member.content.edit',$content)}}"
+                                       class="btn btn-outline-success btn-sm">编辑</a>
+                                </div>
+                            @endcan
+                        </div>
+                    </div>
                     <div class="small text-secondary clearfix">
                         <div class="float-left pt-2">
                             <i class="fa fa-file-text-o"></i>

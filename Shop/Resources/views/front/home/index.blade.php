@@ -13,9 +13,12 @@
                             并且100%开源免费可随便用在任何商业用途。
 
                         </p>
-                        <a href="{{route('shop.front.download.index')}}" class="btn btn-primary mr-2">下载软件</a>
-                        <a href="https://github.com/houdunwang/hdcms" class="btn btn-outline-success mr-2">查看源码</a>
-                        <a href="http://doc.hdcms.com" class="btn btn-outline-primary">在线手册</a>
+                        <a href="{{route('shop.front.download.index')}}"
+                           class="btn btn-primary mr-2">下载软件</a>
+                        <a href="https://github.com/houdunwang/hdcms"
+                           class="btn btn-outline-success mr-2">查看源码</a>
+                        <a href="https://www.houdunren.com/document/front/article/10"
+                           class="btn btn-outline-primary">在线手册</a>
                     </div>
                     <div class="col-8 banner">
                         <div class="b-5 h-100 d-flex flex-column">
