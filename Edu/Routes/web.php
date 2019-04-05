@@ -45,9 +45,12 @@ Route::group([
     Route::any('topic-search', 'TopicController@search')->name('topic.search');
     Route::resource('sign', 'SignController');
     Route::resource('lesson', 'LessonController');
+    Route::any('lesson-search', 'LessonController@search')->name('lesson.search');
+    Route::get('buy/lesson/{lesson}', 'LessonBuyController@make')->name('buy.lesson');
     Route::get('lesson-recommend/{lesson}', 'LessonController@recommend')->name('lesson.recommend');
     Route::get('tag/{tag}', 'LessonController@tag')->name('lesson.tag');
     Route::resource('video', 'VideoController');
+    Route::any('video-search', 'VideoController@search')->name('video.search');
     Route::get('setup', 'LessonController@setup');
     Route::resource('live', 'LiveController');
     Route::get('exam/{video}', 'ExamController@show')->name('exam.show')

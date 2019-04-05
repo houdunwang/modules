@@ -23,8 +23,13 @@ class EduTopic extends Model
     {
         return [
             'title' => $this['title'],
-            'content' =>mb_substr($this['content'],0,100),
+            'content' => mb_substr($this['content'], 0, 100),
         ];
+    }
+
+    public function scopeSearchByLike($query, $word)
+    {
+        return $query->where('title', 'like', "%{$word}%");
     }
 
     public function user()

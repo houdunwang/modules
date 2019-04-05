@@ -10,6 +10,7 @@
 namespace Modules\Edu\Services;
 
 use App\Servers\PayServer;
+use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduOrder;
 use Modules\Edu\Entities\EduSubscribe;
 
@@ -36,6 +37,22 @@ class OrderServer
             'user_id' => auth()->id(),
             'type' => "subscribe",
             'month' => $subscribe['month'],
+            'module_id' => module()['id'],
+        ]);
+        $payServer->aliPay($eduOrder);
+    }
+
+    public function lesson(EduLesson $lesson)
+    {
+        $payServer = app(PayServer::class);
+        $eduOrder = EduOrder::create([
+            'price' => $lesson['price'],
+            'subject' => $lesson['title'],
+            'sn' => $payServer->generateOrderSn(),
+            'type' => 'lesson',
+            'site_id' => \site()['id'],
+            'user_id' => auth()->id(),
+            'lesson_id' => $lesson['id'],
             'module_id' => module()['id'],
         ]);
         $payServer->aliPay($eduOrder);

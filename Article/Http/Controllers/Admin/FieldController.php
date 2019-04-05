@@ -26,7 +26,6 @@ class FieldController extends Controller
     public function store(ArticleModel $model, Request $request, FieldRepository $repository)
     {
         $data = $request->input();
-//        dd($data);
         $data['model_id'] = $model['id'];
         $data['field']['options'] = \GuzzleHttp\json_decode($data['field']['options'], true);
         $repository->create($data);

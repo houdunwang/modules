@@ -3,7 +3,22 @@
 @section('content')
     <div class="container mt-5">
         <div class="row">
+
             <div class="col-12 bg-white p-3 border rounded shadow-sm">
+                <div class="mb-3 pb-1">
+                    <form action="{{module_link('edu.front.lesson.search')}}" method="post">
+                        @csrf
+                        <div class="input-group input-group input-group-sm">
+                            <input type="text" class="form-control" placeholder="" name="word"
+                                   aria-label="Recipient's username with two button addons"
+                                   aria-describedby="button-addon4">
+                            <div class="input-group-append" id="button-addon4">
+                                <button class="btn btn-outline-secondary" type="submit" name="type" value="lesson">搜索课程</button>
+                                <button class="btn btn-outline-secondary" type="submit" name="type" value="video">搜索视频</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="d-flex justify-content-start flex-wrap">
                     <a href="{{route('edu.front.lesson.index')}}"
                        class="{{active_class(if_route('edu.front.lesson.index'),'active')}}  btn btn-outline-secondary btn-sm mr-3 border-0">
@@ -15,6 +30,7 @@
                             {{$tag['name']}}
                         </a>
                     @endforeach
+
                 </div>
             </div>
             <div class="col-12 bg-white p-3 border rounded shadow-sm mt-3 lessons pt-3">

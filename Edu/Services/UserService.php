@@ -12,6 +12,7 @@ namespace Modules\Edu\Services;
 use App\User;
 use Modules\Edu\Entities\EduDuration;
 use Modules\Edu\Entities\EduLesson;
+use Modules\Edu\Entities\EduLessonBuy;
 use Modules\Edu\Entities\EduVideo;
 use Modules\Edu\Repositories\DurationRepository;
 use Modules\Edu\Repositories\ExamRepository;
@@ -65,16 +66,22 @@ class UserService
      */
     public function canPlayVideo(EduVideo $video, User $user): bool
     {
+        //免费课程
         if ($video->lesson['free']) {
             return true;
         }
-        //订阅用户免费
+        //订阅用户
         if ($video->lesson->subscribe_free_play) {
             $duration = app(DurationRepository::class)->getUserInfo($user);
             if ($duration['end_time'] > now()) {
                 return true;
             }
         }
+        //已购用户
+        if ($this->isBuy($user, $video->lesson)) {
+            return true;
+        }
+        //试看
         foreach ($video->lesson->video as $i => $v) {
             if ($i > $video['lesson']['free_num']) {
                 return false;
@@ -83,5 +90,21 @@ class UserService
             }
         }
         return false;
+    }
+
+    /**
+     * 已购
+     * @param User $user
+     * @param EduLesson $lesson
+     * @return bool
+     */
+    public function isBuy(User $user, EduLesson $lesson)
+    {
+        $where = [
+            ['site_id', \site()['id']],
+            ['user_id', $user['id']],
+            ['lesson_id', $lesson['id']],
+        ];
+        return (bool)EduLessonBuy::where($where)->first();
     }
 }

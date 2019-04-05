@@ -32,7 +32,7 @@ class TopicController extends Controller
     public function search(Request $request)
     {
         $word = $request->query('query', request()->input('word'));
-        $topics = EduTopic::search($word)->paginate(15);
+        $topics = EduTopic::searchByLike($word)->paginate(15);
         return view('edu::front.topic.index', compact('topics'));
     }
 

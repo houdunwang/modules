@@ -3,11 +3,12 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduTag;
+use Modules\Edu\Entities\EduVideo;
 use Modules\Edu\Repositories\LessonRepository;
-use Modules\Edu\Repositories\UserVideoRepository;
 use Modules\Edu\Repositories\VideoRepository;
 
 class LessonController extends Controller
@@ -23,6 +24,25 @@ class LessonController extends Controller
     {
         $lessons = EduLesson::latest('is_commend')->latest('updated_at')->paginate(12);
         return view('edu::front.lesson.index', compact('lessons'));
+    }
+
+    /**
+     * 搜索
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $type = $request->input('type', 'lesson');
+        $word = $request->query('query', request()->input('word'));
+        switch ($type) {
+            case 'video':
+                return redirect(module_link('edu.front.video.search', ['query' => $word]));
+                break;
+            default:
+                $lessons = EduLesson::searchByLike($word)->paginate(15);
+                return view('edu::front.lesson.index', compact('lessons'));
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Traits\Favour;
 use App\Traits\Site;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Modules\Comment\Traits\Comment;
 
 /**
@@ -27,6 +28,18 @@ class EduVideo extends Model
     protected $casts = [
         'question' => 'array',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this['title'],
+        ];
+    }
+
+    public function scopeSearchByLike($query, $word)
+    {
+        return $query->where('title', 'like', "%{$word}%");
+    }
 
     public function getFormatTitleAttribute()
     {

@@ -20,16 +20,27 @@ class EduOrder extends Model
 
     /**
      * 支付成功调用在这里改变定单状态
-     * @throws \Exception
+     * @throws \Throwable
      */
     public function success()
     {
         if (!$this['status']) {
-            \DB::beginTransaction();
-            $this['status'] = true;
-            $this->save();
-            app(UserService::class)->addDuration($this['month'], $this->user);
-            \DB::commit();
+            \DB::transaction(function () {
+                $this['status'] = true;
+                $this->save();
+                switch ($this['type']) {
+                    case 'lesson':
+                        EduLessonBuy::updateOrCreate([
+                            'user_id' => $this['user_id'],
+                            'lesson_id' => $this['lesson_id'],
+                            'site_id' => $this['site_id'],
+                        ], []);
+                        break;
+                    case 'subscribe':
+                        app(UserService::class)->addDuration($this['month'], $this->user);
+                        break;
+                }
+            });
         }
     }
 
@@ -69,12 +80,24 @@ class EduOrder extends Model
         return $this['subject'];
     }
 
+    public function lesson()
+    {
+        return $this->belongsTo(EduLesson::class);
+    }
+
     /**
      * 商品链接
      * @return string
      */
     public function link()
     {
-        return route('edu.front.subscribe.index');
+        switch ($this['type']) {
+            case 'subscribe':
+                return route('edu.front.subscribe.index');
+                break;
+            case 'lesson':
+                return route('edu.front.lesson.show', $this->lesson);
+                break;
+        }
     }
 }

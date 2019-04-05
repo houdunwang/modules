@@ -2,6 +2,7 @@
 
 namespace Modules\Edu\Http\Controllers\Front;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\EduVideo;
 use Modules\Edu\Repositories\UserVideoRepository;
@@ -29,6 +30,18 @@ class VideoController extends Controller
     {
         $videos = $repository->paginate(18, ['*'], 'id');
         return view('edu::front.video.index', compact('videos'));
+    }
+
+    /**
+     * 视频搜索
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $word = $request->query('query', request()->input('word'));
+        $videos = EduVideo::searchByLike($word)->paginate(15);
+        return view('edu::front.video.search', compact('videos'));
     }
 
     /**

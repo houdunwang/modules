@@ -15,4 +15,11 @@ class DocumentContent extends Model
     {
         return $this->belongsTo(DocumentArticle::class, 'article_id');
     }
+
+    public function favourUpdate()
+    {
+        \DB::table($this->getTable())->where('id', $this['id'])->update([
+            'favour_count' => $this->favourCount(),
+        ]);
+    }
 }

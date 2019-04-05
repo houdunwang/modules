@@ -7,6 +7,7 @@ use App\Traits\Favorite;
 use App\Traits\Favour;
 use App\Traits\Site;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class EduLesson extends Model
@@ -35,6 +36,19 @@ class EduLesson extends Model
         'rank',
         'only_down',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this['title'],
+            'description' => $this['description'],
+        ];
+    }
+
+    public function scopeSearchByLike($query, $word)
+    {
+        return $query->where('title','like',"%{$word}%");
+    }
 
     public function scopeType($query, $type)
     {

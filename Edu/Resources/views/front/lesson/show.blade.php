@@ -15,9 +15,15 @@
                         <div class="small text-secondary clearfix">
                             <div class="">
                                 <div class="btn-group btn-group-sm">
+                                    @can('buy',$lesson)
+                                        <a href="{{module_link('edu.front.buy.lesson',$lesson)}}"
+                                           class="btn btn-outline-success">
+                                            <i class="fa fa-shopping-cart"></i> 购买课程
+                                        </a>
+                                    @endcan
                                     @can('update',$lesson)
                                         <a href="{{route('edu.admin.lesson.edit',$lesson)}}"
-                                           class="btn btn-outline-success">
+                                           class="btn btn-outline-secondary">
                                             编辑
                                         </a>
                                         <form action="{{route('edu.front.topic.destroy',$lesson)}}" method="post">
@@ -29,18 +35,18 @@
                                         </button>
                                     @endcan
                                     @can('recommend',$lesson)
-                                            <a href="{{route('edu.front.lesson.recommend',$lesson)}}"
-                                               class="btn {{$lesson['is_commend']?'btn-outline-success':'btn-outline-secondary'}}">
-                                                推荐
-                                            </a>
+                                        <a href="{{route('edu.front.lesson.recommend',$lesson)}}"
+                                           class="btn {{$lesson['is_commend']?'btn-outline-success':'btn-outline-secondary'}}">
+                                            推荐
+                                        </a>
                                     @endcan
-{{--                                    @if ($lesson->download_address)--}}
-{{--                                        @include('edu::front.layouts.download',['lesson'=>$lesson])--}}
-{{--                                        <a href="" class="btn btn-outline-info"--}}
-{{--                                           data-toggle="modal" data-target="#downloadModal">--}}
-{{--                                            下载高清版--}}
-{{--                                        </a>--}}
-{{--                                    @endif--}}
+                                    {{--                                    @if ($lesson->download_address)--}}
+                                    {{--                                        @include('edu::front.layouts.download',['lesson'=>$lesson])--}}
+                                    {{--                                        <a href="" class="btn btn-outline-info"--}}
+                                    {{--                                           data-toggle="modal" data-target="#downloadModal">--}}
+                                    {{--                                            下载高清版--}}
+                                    {{--                                        </a>--}}
+                                    {{--                                    @endif--}}
                                 </div>
                                 @include('components.favorite',['model'=>$lesson])
                             </div>

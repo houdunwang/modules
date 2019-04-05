@@ -34,6 +34,5 @@ class ChatController extends Controller
      */
     public function subscribe(Site $site, Chat $chat, Message $message,Keyword $keyword=null)
     {
-
     }
 }

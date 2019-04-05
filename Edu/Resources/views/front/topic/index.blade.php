@@ -27,8 +27,8 @@
                     @foreach($topics as $topic)
                         <div class="border-bottom border-gray mb-3">
                             <div class="media text-muted pt-1">
-                                <a href="#">
-                                    <img src="{{asset($topic->user['avatar'])}}" alt="{{$topic['title']}}"
+                                <a href="{{module_link('user.home',$topic->user)}}">
+                                    <img src="{{asset($topic->user['avatar'])}}" alt="{{$topic->user['name']}}"
                                          class="avatar rounded mt-1">
                                 </a>
                                 <div class="media-body pb-3 mb-0 small lh-125 pl-3">
