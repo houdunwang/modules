@@ -53,7 +53,7 @@
                         </div>
                     @endforeach
                     <div class="mt-4">
-                        {{$topics->links()}}
+                        {{$topics->onEachSide(1)->links()}}
                     </div>
                 </div>
             </div>

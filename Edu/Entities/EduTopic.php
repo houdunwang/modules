@@ -11,7 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class EduTopic extends Model
 {
-    use Site, Comment, LogsActivity, Searchable;
+    use Site, Comment, LogsActivity;
     protected $fillable = ['title', 'site_id', 'content', 'user_id'];
 
     //设置动态记录的属性，不要记录过多或过大的数据将影响性能

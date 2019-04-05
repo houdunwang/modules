@@ -12,9 +12,9 @@
 <body>
 @include('components.login')
 @includeIf(config_get('Document.topView'))
-<div class="container mt-5 mb-5 {{route_class()}}">
+<div class="container mt-5 mb-5 {{route_class()}} p-0 p-sm-1">
     <div class="row">
-        <div class="col-9">
+        <div class="col-12 col-sm-9">
             <div class="bg-white shadow-sm p-5 border rounded">
                 <div class="border-bottom mb-3 pb-3">
                     <h5 class="pb-1 pt-3 mb-1 text-monospace text-black-50">
@@ -59,20 +59,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-sm-3 col-12 mt-2 mt-sm-0">
             @include('components.user',['user'=>$content->article->user])
-            <script>
-                require(['jquerySticky'],function(){
-                    $("#jqueryPin").sticky({topSpacing:0});
-                })
-            </script>
+            @if (!\Browser::isMobile())
+                <script>
+                    require(['jquerySticky'], function () {
+                        $("#jqueryPin").sticky({topSpacing: 0});
+                    })
+                </script>
+            @endif
             <div class="bg-white border p-2 shadow-sm" id="jqueryPin">
                 <ul class="nav nav-tabs " id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">章节列表</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home" aria-selected="true">章节列表</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">文档目录</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                           aria-controls="profile" aria-selected="false">文档目录</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -113,7 +117,7 @@
 @includeIf(config_get('Document.footerView'))
 @stack('js')
 <script>
-markdown_toc('.markdown','.markdown-toc')
+    markdown_toc('.markdown', '.markdown-toc')
 </script>
 </body>
 </html>

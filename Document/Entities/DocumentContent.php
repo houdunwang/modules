@@ -16,6 +16,10 @@ class DocumentContent extends Model
         return $this->belongsTo(DocumentArticle::class, 'article_id');
     }
 
+    /**
+     * 系统会在点赞动作后执行这个方法
+     * @return bool
+     */
     public function favourUpdate()
     {
         \DB::table($this->getTable())->where('id', $this['id'])->update([

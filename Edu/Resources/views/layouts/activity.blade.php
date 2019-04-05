@@ -26,5 +26,5 @@
     @endif
 @endforeach
 <div class="mt-4">
-    {{$activities->links()}}
+    {{$activities->onEachSide(1)->links()}}
 </div>

@@ -30,6 +30,9 @@ class ArticleController extends Controller
     public function show(DocumentArticle $article, ContentRepository $repository)
     {
         $menus = $repository->tree($article);
+        if (count($menus) < 3) {
+            return redirect(module_link('document.front.content.show', ['id'=>$menus[0]['id']]));
+        }
         return view('document::front.article.show', compact('article', 'menus'));
     }
 

@@ -72,7 +72,7 @@ class TopicController extends Controller
         \DB::beginTransaction();
         $topic->update($request->input());
         $topic->tags()->detach();
-        $topic->tags()->attach($request->input('tags'), ['site_id' => \site()['id']]);
+        $topic->tags()->attach($request->input('tags'));
         \DB::commit();
         return redirect(route('edu.front.topic.show', $topic))->with('success', '修改成功');
     }

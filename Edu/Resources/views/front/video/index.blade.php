@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-white">
-                        {{$videos->links()}}
+                        {{$videos->onEachSide(1)->links()}}
                     </div>
                 </div>
             </div>

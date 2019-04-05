@@ -53,7 +53,7 @@
             </div>
         </div>
     @endunless
-    <div class="container">
+    <div class="container p-0 p-sm-1">
         <div class="row mt-3">
             <div class="col-12">
                 <div class="card-footer text-muted border bg-light mb-2 shadow-sm d-flex justify-content-between p-4">
@@ -74,13 +74,13 @@
                             @if ($prevVideo = $video->prevVideo)
                                 <a href="{{route('edu.front.video.show',$prevVideo)}}"
                                    class="btn btn-outline-success">
-                                    上一课
+                                    上集
                                 </a>
                             @endif
                             @if ($nextVideo = $video->nextVideo)
                                 <a href="{{route('edu.front.video.show',$nextVideo)}}"
                                    class="btn btn-outline-success">
-                                    下一课
+                                    下集
                                 </a>
                             @endif
                             @can('update',$video->lesson)
