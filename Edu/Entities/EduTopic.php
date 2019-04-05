@@ -5,18 +5,27 @@ namespace Modules\Edu\Entities;
 use App\Traits\Site;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Modules\Comment\Traits\Comment;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class EduTopic extends Model
 {
-    use Site, Comment, LogsActivity;
+    use Site, Comment, LogsActivity, Searchable;
     protected $fillable = ['title', 'site_id', 'content', 'user_id'];
 
     //设置动态记录的属性，不要记录过多或过大的数据将影响性能
     protected static $logAttributes = ['title'];
     protected static $recordEvents = ['created', 'updated'];
     protected static $logName = 'edu_topic';
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this['title'],
+            'content' =>mb_substr($this['content'],0,100),
+        ];
+    }
 
     public function user()
     {

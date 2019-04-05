@@ -3,6 +3,7 @@
 namespace Modules\Edu\Http\Controllers\Front;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\EduTag;
 use Modules\Edu\Entities\EduTopic;
@@ -25,6 +26,13 @@ class TopicController extends Controller
     public function index()
     {
         $topics = EduTopic::site()->latest()->paginate(15);
+        return view('edu::front.topic.index', compact('topics'));
+    }
+
+    public function search(Request $request)
+    {
+        $word = $request->query('query', request()->input('word'));
+        $topics = EduTopic::search($word)->paginate(15);
         return view('edu::front.topic.index', compact('topics'));
     }
 

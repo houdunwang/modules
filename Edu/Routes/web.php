@@ -42,6 +42,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('topic', 'TopicController');
     Route::get('topic-recommend/{topic}', 'TopicController@recommend')->name('topic.recommend');
+    Route::any('topic-search', 'TopicController@search')->name('topic.search');
     Route::resource('sign', 'SignController');
     Route::resource('lesson', 'LessonController');
     Route::get('lesson-recommend/{lesson}', 'LessonController@recommend')->name('lesson.recommend');
