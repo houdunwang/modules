@@ -17,7 +17,7 @@
                            class="btn btn-primary mr-2">下载软件</a>
                         <a href="https://github.com/houdunwang/hdcms"
                            class="btn btn-outline-success mr-2">查看源码</a>
-                        <a href="https://www.houdunren.com/document/front/article/10"
+                        <a href="https://www.houdunren.com/document/front/article/1"
                            class="btn btn-outline-primary">在线手册</a>
                     </div>
                     <div class="col-8 banner">

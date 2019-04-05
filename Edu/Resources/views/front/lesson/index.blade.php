@@ -13,8 +13,11 @@
                                    aria-label="Recipient's username with two button addons"
                                    aria-describedby="button-addon4">
                             <div class="input-group-append" id="button-addon4">
-                                <button class="btn btn-outline-secondary" type="submit" name="type" value="lesson">搜索课程</button>
-                                <button class="btn btn-outline-secondary" type="submit" name="type" value="video">搜索视频</button>
+                                <button class="btn btn-outline-secondary" type="submit" name="type" value="lesson">
+                                    搜索课程
+                                </button>
+                                <button class="btn btn-outline-secondary" type="submit" name="type" value="video">搜索视频
+                                </button>
                             </div>
                         </div>
                     </form>

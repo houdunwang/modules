@@ -107,4 +107,18 @@ class UserService
         ];
         return (bool)EduLessonBuy::where($where)->first();
     }
+
+    /**
+     * 订阅检测
+     * @param User $user
+     * @return bool
+     */
+    public function subscribeCheck(User $user): bool
+    {
+        $duration = app(DurationRepository::class)->getUserInfo($user);
+        if ($duration['end_time'] > now()) {
+            return true;
+        }
+        return false;
+    }
 }

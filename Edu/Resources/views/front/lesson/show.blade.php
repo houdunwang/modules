@@ -18,8 +18,14 @@
                                     @can('buy',$lesson)
                                         <a href="{{module_link('edu.front.buy.lesson',$lesson)}}"
                                            class="btn btn-outline-success">
-                                            <i class="fa fa-shopping-cart"></i> 购买课程
+                                            <i class="fa fa-shopping-cart"></i> 单独购买课程
                                         </a>
+                                        @if ($lesson['subscribe_free_play'])
+                                            <a href="/edu/front/subscribe"
+                                               class="btn btn-info">
+                                                <i class="fa fa-flag"></i> 订阅会员观看全站教程
+                                            </a>
+                                        @endif
                                     @endcan
                                     @can('update',$lesson)
                                         <a href="{{route('edu.admin.lesson.edit',$lesson)}}"

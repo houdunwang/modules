@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduLessonBuy;
+use Modules\Edu\Services\UserService;
 
 class LessonPolicy
 {
@@ -26,14 +27,27 @@ class LessonPolicy
         return is_site_manage();
     }
 
+    /**
+     * 需要购买
+     * @param User $user
+     * @param EduLesson $lesson
+     * @return bool
+     */
     public function buy(User $user, EduLesson $lesson)
     {
-        $where = [
-            ['site_id', \site()['id']],
-            ['user_id', $user['id']],
-            ['lesson_id', $lesson['id']],
-        ];
-        return $lesson['price'] > 0 && !EduLessonBuy::where($where)->first();
+        if ($lesson['free']) {
+            return false;
+        }
+        $userServer = new UserService();
+        //订阅检测
+        if ($lesson['subscribe_free_play'] && $userServer->subscribeCheck($user)) {
+            return false;
+        }
+        //单独购买
+        if ($lesson['price'] > 0 && $userServer->isBuy($user, $lesson)) {
+            return false;
+        }
+        return true;
     }
 
     public function __construct()

@@ -32,7 +32,7 @@
                                href="{{module_link('shop.front.log.index')}}">更新日志</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a class="nav-link " href="http://doc.hdcms.com">在线手册</a>
+                            <a class="nav-link " href="https://www.houdunren.com/document/front/article/1">在线手册</a>
                         </li>
                     </ul>
                     @auth()
