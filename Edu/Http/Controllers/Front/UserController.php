@@ -8,8 +8,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduTopic;
 use Modules\Edu\Entities\EduUserVideo;
+use Modules\Edu\Entities\EduVideo;
 
 /**
  * 个人空间
@@ -39,24 +41,27 @@ class UserController extends Controller
         return view('edu::front.user.favorite', compact('user', 'favorites'));
     }
 
+    public function favoriteLesson(FavoriteRepository $repository)
+    {
+        $user = User::findOrFail(\request('uid'));
+        $favorites = $repository->lists($user, 8, EduLesson::class);
+        return view('edu::front.user.favorite_lesson', compact('user', 'favorites'));
+    }
+
+    public function favoriteVideo(FavoriteRepository $repository)
+    {
+        $user = User::findOrFail(\request('uid'));
+        $favorites = $repository->lists($user, 8, EduVideo::class);
+        return view('edu::front.user.favorite_video', compact('user', 'favorites'));
+    }
+
     public function lesson()
     {
         $user = User::findOrFail(\request('uid'));
-        $learns = EduUserVideo::with('video')->where('site_id', site()['id'])->latest('id')->paginate('16');
-        return view('edu::front.user.learn', compact('user', 'learns'));
-    }
-
-    public function follower()
-    {
-        $user = User::findOrFail(\request('uid'));
-        $learns = EduUserVideo::with('video')->where('site_id', site()['id'])->latest('id')->paginate('16');
-        return view('edu::front.user.learn', compact('user', 'learns'));
-    }
-
-    public function fans()
-    {
-        $user = User::findOrFail(\request('uid'));
-        $learns = EduUserVideo::with('video')->where('site_id', site()['id'])->latest('id')->paginate('16');
-        return view('edu::front.user.learn', compact('user', 'learns'));
+        $lessonIds = EduUserVideo::where(function ($query) use ($user) {
+            $query->where('user_id', $user['id'])->where('site_id', site()['id']);
+        })->pluck('lesson_id');
+        $lessons = EduLesson::whereIn('id', $lessonIds)->paginate(8);
+        return view('edu::front.user.lesson', compact('user', 'lessons'));
     }
 }

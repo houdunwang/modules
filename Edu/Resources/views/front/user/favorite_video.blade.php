@@ -5,8 +5,8 @@
         <div class="pt-2 pb-2 mb-2 border-bottom">
             <div class="row">
                 <div class="col-8">
-                    <a href="{{$favorite->belongModel->getLink()}}" class="d-block">
-                        {{$favorite->belongModel->getTitle()}}
+                    <a href="{{module_link('edu.front.topic.show',$favorite->belongModel)}}" class="d-block">
+                        {{$favorite->belongModel->title}}
                     </a>
                 </div>
                 <div class="col-4 text-right small">
@@ -16,6 +16,6 @@
         </div>
     @endforeach
     <div class="pt-3">
-        {{$favorites->appends(['uid'=>$user['id']])->links()}}
+        {{$favorites->onEachSide(1)->appends(['uid'=>$user['id']])->links()}}
     </div>
 @endsection

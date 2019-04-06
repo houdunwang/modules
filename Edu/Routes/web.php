@@ -74,6 +74,8 @@ Route::group([
     Route::get('activity', 'UserController@activity')->name('activity');
     Route::get('topic', 'UserController@topic')->name('topic');
     Route::get('favorite', 'UserController@favorite')->name('favorite');
+    Route::get('favorite-lesson', 'UserController@favoriteLesson')->name('favorite.lesson');
+    Route::get('favorite-video', 'UserController@favoriteVideo')->name('favorite.video');
     Route::get('lesson', 'UserController@lesson')->name('lesson');
     Route::get('follower', 'UserController@follower')->name('follower');
     Route::get('fans', 'UserController@fans')->name('fans');

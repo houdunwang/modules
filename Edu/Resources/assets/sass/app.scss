@@ -70,23 +70,6 @@
     }
   }
 
-  .edu-front-lesson-index, .edu-front-lesson-tag, .edu-front-lesson-search {
-    .lessons {
-      .card-body.thumb {
-        overflow: hidden;
-        height: 160px;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .title {
-        height: 65px;
-      }
-    }
-  }
 
   .edu-front-video-show {
     overflow: hidden;
@@ -136,5 +119,22 @@
         }
       }
     }
+  }
+}
+
+//课程图片
+.edu-lesson-card {
+  .card-body.thumb {
+    overflow: hidden;
+    height: 160px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .title {
+    height: 65px;
   }
 }

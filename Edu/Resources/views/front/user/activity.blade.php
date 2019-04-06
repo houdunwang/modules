@@ -1,26 +1,26 @@
 @extends('user.layouts.master')
 @section('content')
-    <h5><i class="fa fa-archive"></i> TA的动态</h5>
+    <h5>
+        <i class="fa fa-bars"></i> TA的动态
+    </h5>
     <hr>
-    <div class="border-gray mb-3">
-        @foreach($activities as $activity)
-            @if ($activity->subject && $activity->subject->getTitle())
-                <div class="border-bottom border-gray mb-3">
-                    <div class="media text-muted pt-1">
-                        <div class="media-body pb-3 mb-0 small lh-125 pl-3">
-                            <h6 class="float-left">
-                                <a href="{{$activity->subject->getLink()}}">
-                                    {{$activity->subject->getTitle()}}
-                                </a>
-                            </h6>
-                            <div class="small font-weight-light float-right">
-                                <i class="fa fa-clock-o"></i> {{$activity->updated_at->diffForHumans()}}
-                            </div>
-                        </div>
+    @foreach($activities as $activity)
+        <div class="pt-2 pb-2 mb-2 border-bottom">
+            <div class="row">
+                @if ($activity->subject && $activity->subject->getTitle())
+                    <div class="col-8">
+                        <a href="{{$activity->subject->getLink()}}" class="d-block">
+                            {{$activity->subject->getTitle()}}
+                        </a>
                     </div>
-                </div>
-            @endif
-        @endforeach
-        {{$activities->appends(['uid'=>$user['id']])->links()}}
+                    <div class="col-4 text-right small">
+                        <i class="fa fa-clock-o"></i> {{$activity->updated_at->diffForHumans()}}
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endforeach
+    <div class="pt-3">
+        {{$activities->onEachSide(1)->appends(['uid'=>$user['id']])->links()}}
     </div>
 @endsection
