@@ -6,6 +6,11 @@
             'permission' => '',
         ],
         [
+            'title' => '播客管理',
+            'url' => route('edu.member.blog.index'),
+            'permission' => '',
+        ],
+        [
             'title' => '学习记录',
             'url' => route('edu.front.user.lesson'),
             'permission' => '',

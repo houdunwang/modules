@@ -26,6 +26,7 @@ Route::group([
     'middleware' => ['member'],
 ], function () {
     Route::resource('duration', 'DurationController');
+    Route::resource('blog', 'BlogController');
 });
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ Route::group([
     Route::post('exam/{video}', 'ExamController@store')->name('exam.store')
         ->middleware('auth');
     Route::resource('subscribe', 'SubscribeController');
+    //视频播客
+    Route::resource('blog', 'BlogController');
 });
 
 /*

@@ -3,6 +3,7 @@
 namespace Modules\Comment\Http\Controllers\Front;
 
 use App\Notifications\UserNotification;
+use App\Servers\UserServer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,7 +25,7 @@ class ContentController extends Controller
      * @return array
      * @throws \App\Exceptions\ResponseHttpException
      */
-    public function store(ContentRequest $request)
+    public function store(ContentRequest $request, UserServer $userServer)
     {
         $key = 'comment_send_cache' . auth()->id();
         $time = now()->addSecond(config_get('Comment.timeout', 20));
@@ -38,11 +39,11 @@ class ContentController extends Controller
                 'user_id' => auth()->id(),
             ]);
             $model->commentCreated();
-            $model->user->notify(new UserNotification(['message' => '你有新的评论', 'url' => $comment->getLink()]));
+            $userServer->notify($model->user, '你有新的评论', $comment->getLink());
             return [
                 'message' => '评论发表成功',
                 'code' => 0,
-                'view' => view('comment::layouts._comment', compact('comment')).'',
+                'view' => view('comment::layouts._comment', compact('comment')) . '',
             ];
         }
         $diffSecond = now()->diffInSeconds(\Cache::get($key));

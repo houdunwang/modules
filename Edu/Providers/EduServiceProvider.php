@@ -4,9 +4,11 @@ namespace Modules\Edu\Providers;
 
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+use Modules\Edu\Entities\EduBlog;
 use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduSign;
 use Modules\Edu\Entities\EduTopic;
+use Modules\Edu\Policies\BlogPolicy;
 use Modules\Edu\Policies\EduTopicPolicy;
 use Modules\Edu\Policies\LessonPolicy;
 use Modules\Edu\Policies\SignPolicy;
@@ -25,6 +27,7 @@ class EduServiceProvider extends AuthServiceProvider
         EduTopic::class => EduTopicPolicy::class,
         EduSign::class => SignPolicy::class,
         EduLesson::class => LessonPolicy::class,
+        EduBlog::class => BlogPolicy::class,
     ];
 
     public function boot()

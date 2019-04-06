@@ -61,7 +61,7 @@ class UserController extends Controller
         $lessonIds = EduUserVideo::where(function ($query) use ($user) {
             $query->where('user_id', $user['id'])->where('site_id', site()['id']);
         })->pluck('lesson_id');
-        $lessons = EduLesson::whereIn('id', $lessonIds)->paginate(8);
+        $lessons = EduLesson::whereIn('id', $lessonIds)->paginate(9);
         return view('edu::front.user.lesson', compact('user', 'lessons'));
     }
 }
