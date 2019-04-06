@@ -2,7 +2,7 @@
     <div class="card-body p-0 thumb border-bottom">
         <a href="{{route('edu.front.lesson.show',$lesson)}}">
             <img src="{{$lesson['thumb']}}" alt="{{$lesson['title']}}"
-                 class="border-0 p-0 rounded-0">
+                 class="border-0 p-0 rounded-top">
         </a>
     </div>
     <div class="card-header bg-white border-bottom-0 title">
@@ -10,7 +10,7 @@
             {{$lesson['title']}}
         </a>
     </div>
-    <div class="card-footer d-flex justify-content-between small bg-white">
+    <div class="card-footer d-flex justify-content-between small bg-light">
         <div>
             <a href="{{route('edu.front.lesson.show',$lesson)}}">
                 开始学习

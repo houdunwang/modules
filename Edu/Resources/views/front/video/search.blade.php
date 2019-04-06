@@ -10,10 +10,9 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-2">
-                            <form action="{{module_link('edu.front.lesson.search')}}" method="post">
-                                @csrf
+                            <form action="{{module_link('edu.front.lesson.search')}}" method="get">
                                 <div class="input-group input-group input-group-sm">
-                                    <input type="text" class="form-control" placeholder="" name="word"
+                                    <input type="text" class="form-control" placeholder="" name="query"
                                            aria-label="Recipient's username with two button addons"
                                            aria-describedby="button-addon4">
                                     <div class="input-group-append" id="button-addon4">
@@ -40,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-white">
-                        {{$videos->links()}}
+                        {{$videos->onEachSide(1)->appends(['query'=>request()['query']])->links()}}
                     </div>
                 </div>
             </div>

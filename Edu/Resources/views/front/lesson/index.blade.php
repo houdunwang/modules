@@ -3,13 +3,11 @@
 @section('content')
     <div class="container mt-5">
         <div class="row">
-
             <div class="col-12 bg-white p-3 border rounded shadow-sm">
                 <div class="mb-3 pb-1">
-                    <form action="{{module_link('edu.front.lesson.search')}}" method="post">
-                        @csrf
+                    <form action="{{module_link('edu.front.lesson.search')}}" method="get">
                         <div class="input-group input-group input-group-sm">
-                            <input type="text" class="form-control" placeholder="" name="word"
+                            <input type="text" class="form-control" name="query"
                                    aria-label="Recipient's username with two button addons"
                                    aria-describedby="button-addon4">
                             <div class="input-group-append" id="button-addon4">
@@ -40,12 +38,14 @@
                 <div class="row">
                     @foreach($lessons as $lesson)
                         <div class="col-12 col-sm-3">
-                            @include('edu::front.layouts.lesson',$lesson)
+                            <div class="">
+                                @include('edu::front.layouts.lesson',$lesson)
+                            </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="border-top pt-4">
-                    {{$lessons->onEachSide(1)->links()}}
+                    {{$lessons->onEachSide(1)->appends(['query'=>request()['query']])->links()}}
                 </div>
             </div>
         </div>

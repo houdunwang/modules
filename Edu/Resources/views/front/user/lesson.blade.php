@@ -7,7 +7,7 @@
     <hr>
     <div class="row lessons">
         @foreach($lessons as $lesson)
-            <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-4">
                 @include('edu::front.layouts.lesson',$lesson)
             </div>
         @endforeach
