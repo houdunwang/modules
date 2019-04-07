@@ -12,7 +12,7 @@ class BlogController extends Controller
 {
     public function index(BlogRepository $repository)
     {
-        $blogs = $repository->paginate(12);
+        $blogs = $repository->paginate(9);
         return view('edu::front.blog.index', compact('blogs'));
     }
 

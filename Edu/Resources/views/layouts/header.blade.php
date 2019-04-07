@@ -64,7 +64,7 @@
                             <a class="nav-link" href="{{route('edu.front.live.index')}}">八点直播</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a class="nav-link" href="{{module_link('edu.front.blog.index')}}">视频播客</a>
+                            <a class="nav-link" href="{{module_link('edu.front.blog.index')}}">视频日记</a>
                         </li>
                     </ul>
                     @auth()

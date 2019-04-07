@@ -17,12 +17,12 @@ class BlogPolicy
 
     public function update(User $user, EduBlog $blog)
     {
-        return $blog['user_id'] == $user['id'];
+        return $blog['user_id'] == $user['id'] || is_site_manage();
     }
 
     public function delete(User $user, EduBlog $blog)
     {
-        return $blog['user_id'] == $user['id'];
+        return $blog['user_id'] == $user['id'] || is_site_manage();
     }
 
     /**
