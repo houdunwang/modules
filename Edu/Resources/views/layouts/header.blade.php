@@ -1,5 +1,5 @@
 <div class="border-bottom border-info header shadow">
-    <div class="bg-white border-gray pb-2 pt-2 shadow-sm">
+    <div class="bg-white border-gray pb-2 pt-2 shadow-sm font-weight-bold">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-white pl-0">
                 <a class="mr-5 text-info navbar-brand font-weight-bold" href="/">
@@ -10,7 +10,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-lg-0 font-weight-bold">
+                    <ul class="navbar-nav mr-auto mt-lg-0">
                         <li class="nav-item dropdown mr-3">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +61,7 @@
                             </li>
                         @endif
                         <li class="nav-item mr-3">
-                            <a class="nav-link " href="{{route('edu.front.live.index')}}">八点直播</a>
+                            <a class="nav-link" href="{{route('edu.front.live.index')}}">八点直播</a>
                         </li>
                         <li class="nav-item mr-3">
                             <a class="nav-link" href="{{module_link('edu.front.blog.index')}}">视频播客</a>
