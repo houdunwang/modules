@@ -30,7 +30,7 @@ class UserController extends Controller
     public function topic()
     {
         $user = User::findOrFail(\request('uid'));
-        $topics = EduTopic::where('user_id', $user['id'])->where('site_id', \site()['id'])->paginate(15);
+        $topics = EduTopic::where('user_id', $user['id'])->where('site_id', \site()['id'])->latest('id')->paginate(15);
         return view('edu::front.user.topic', compact('user', 'topics'));
     }
 

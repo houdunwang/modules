@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 video">
-                    {!! $blog['path'] !!}
+                    {!! clean($blog['path'],'bilibli') !!}
                 </div>
                 @push('css')
                     <style>

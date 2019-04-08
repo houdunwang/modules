@@ -60,7 +60,7 @@ Route::group([
         ->middleware('auth');
     Route::resource('subscribe', 'SubscribeController');
     //视频播客
-    Route::resource('blog', 'BlogController');
+    Route::resource('blog', 'BlogController')->middleware(['auth']);
 });
 
 /*

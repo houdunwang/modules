@@ -40,7 +40,7 @@ class LessonController extends Controller
                 return redirect(module_link('edu.front.video.search', ['query' => $word]));
                 break;
             default:
-                $lessons = EduLesson::searchByLike($word)->paginate(15);
+                $lessons = EduLesson::searchByLike($word)->paginate(16);
                 return view('edu::front.lesson.index', compact('lessons'));
         }
     }
