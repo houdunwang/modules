@@ -32,15 +32,18 @@
                     </div>
                     <div class="col-xs-4 col-md-5 text-right mt-3">
                         <div class="btn-group btn-group-sm mt-3" role="group" aria-label="Basic example">
+                            <a class="btn btn-outline-info" href="{{module_link('shop.front.module.show',$module)}}">
+                                预览
+                            </a>
                             <a class="btn btn-outline-success" href="{{module_link('shop.member.module.edit',$module)}}">
-                                编辑模块
+                                编辑
                             </a>
                             <a class="btn btn-outline-info" href="{{module_link('shop.member.package.index',['id'=>$module])}}">压缩包列表</a>
                             <form action="{{module_link('shop.member.module.destroy',$module)}}" method="post">
                                 @csrf @method('DELETE')
                             </form>
                             <button type="button" class="btn btn-outline-danger" onclick="destroy(this)">
-                                删除模块
+                                删除
                             </button>
                             <a class="btn btn-outline-secondary" href="{{module_link('shop.member.module.create')}}">
                                 发布新版本

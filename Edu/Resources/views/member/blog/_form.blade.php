@@ -8,7 +8,7 @@
         <div class="form-group">
             <label>视频地址</label>
             <textarea name="path" class="form-control" rows="3">{{old('path',$blog['path']??'')}}</textarea>
-          <small>请上传B站等第三方站点视频地址</small>
+          <small>请上传B站等第三方站点视频地址，如果是iframe要填写iframe中src属性值</small>
         </div>
         <div class="form-group">
             <label>封面图片</label>

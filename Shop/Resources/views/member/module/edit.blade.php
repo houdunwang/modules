@@ -38,12 +38,35 @@
                 <div class="form-group">
                     <label>详细介绍</label>
                     <div class="input-group">
-                        <textarea id="content" name="content" style="height:300px;width:100%;">{{$module['content']}}</textarea>
+                        <div id="editormd">
+                            <textarea style="display:none;" name="content">{{$module['content']}}</textarea>
+                        </div>
                         <script>
                             require(['hdjs'], function (hdjs) {
-                                hdjs.ueditor('content');
-                            })
+                                hdjs.editormd("editormd", {
+                                    width: '100%',
+                                    height: 300,
+                                    toolbarIcons : function() {
+                                        return [
+                                            "bold", "del", "italic", "quote","|",
+                                            "list-ul", "list-ol", "hr","table", "|",
+                                            "link", "hdimage", "code-block", "|",
+                                            "watch", "preview", "fullscreen"
+                                        ]
+                                    },
+                                    // //后台上传地址，默认为 hdjs配置项window.hdjs.uploader
+                                    // server:'',
+                                    //editor.md库位置
+{{--                                    path: "{{asset('org/hdjs')}}/package/editor.md/lib/"--}}
+                                });
+                            });
                         </script>
+{{--                        <textarea id="content" name="content" style="height:300px;width:100%;">{{$module['content']}}</textarea>--}}
+{{--                        <script>--}}
+{{--                            require(['hdjs'], function (hdjs) {--}}
+{{--                                hdjs.ueditor('content');--}}
+{{--                            })--}}
+{{--                        </script>--}}
                     </div>
                 </div>
             </div>

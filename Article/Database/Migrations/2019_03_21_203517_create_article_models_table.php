@@ -16,6 +16,7 @@ class CreateArticleModelsTable extends Migration
         Schema::create('article_models', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique()->comment('模型名称');
+            $table->string('name')->unique()->nullable()->comment('模型名称');
             table_site_relation($table);
             $table->unsignedTinyInteger('is_system')->default(0)->comment('系统模型');
             $table->timestamps();

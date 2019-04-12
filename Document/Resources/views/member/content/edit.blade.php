@@ -34,14 +34,14 @@
             hdjs.editormd("editormd", {
                 width: '100%',
                 height: '92vh',
-                toolbarIcons: function () {
-                    return [
-                        "bold", "del", "italic", "quote", "|",
-                        "list-ul", "list-ol", "hr", "|",
-                        "link", "hdimage", "|",
-                        "watch", "preview", "fullscreen"
-                    ]
-                },
+                // toolbarIcons: function () {
+                //     return [
+                //         "bold", "del", "italic", "quote", "|",
+                //         "list-ul", "list-ol", "hr", "|",
+                //         "link", "hdimage", "|",
+                //         "watch", "preview", "fullscreen"
+                //     ]
+                // },
                 path: "{{asset('js/hdjs')}}/package/editor.md/lib/",
                 onchange: function () {
                     if (!timeoutId) {

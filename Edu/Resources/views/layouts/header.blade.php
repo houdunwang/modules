@@ -68,9 +68,6 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{module_link('edu.front.blog.index')}}">视频日记</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"
-                                   href="{{module_link('edu.front.video.index')}}">更新列表</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('edu.front.live.index')}}">八点直播</a>
                             </div>
                         </li>

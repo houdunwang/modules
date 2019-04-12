@@ -5,13 +5,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 video">
-                    {!! clean($blog['path'],'bilibli') !!}
+                    <iframe src="{{$blog['path']}}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
                 </div>
                 @push('css')
                     <style>
                         .video iframe {
                             width: 100%;
-                            min-height: 650px;
+                            min-height: 730px;
                         }
                     </style>
                 @endpush
