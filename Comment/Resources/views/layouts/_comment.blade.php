@@ -37,12 +37,10 @@
                     {{$comment->favour_count}} 个赞
                 </a>
                 @auth
-                    {{--@if ($comment['user_id']!= auth()->id())--}}
                     <a href="javascript:void(0);" class="pl-2 pr-2 pt-0 pb-0"
                        onclick="reply('{{$comment->user->name}}',{{$comment->user->id}},{{$comment['id']}})">
                         <i class="fa fa-reply"></i> 回复
                     </a>
-                    {{--@endif--}}
                 @endauth
                 @can('delete',$comment)
                     <form action="{{module_link('comment.front.content.destroy',$comment)}}" method="post"
