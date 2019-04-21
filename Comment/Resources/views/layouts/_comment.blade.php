@@ -19,13 +19,6 @@
     </div>
     <div class="card-body text-secondary">
         <div class="comment-markdown markdown">
-            @if ($comment->parent_id>0)
-                <div class="float-left pr-2">
-                    <a href="{{route('user.home',$comment->reply->user)}}" class="text-secondary text-black-50">
-                        {{'@'.$comment->reply->user->name}}
-                    </a>
-                </div>
-            @endif
             {!! $comment->content !!}
         </div>
         @isset($key)
@@ -55,19 +48,3 @@
         @endisset
     </div>
 </div>
-@push('js')
-    <script>
-        function reply(name, user_id, comment_id) {
-            require(['hdjs'], function (hdjs) {
-                $("[name='parent_id']").val(comment_id);
-                window.simpleMde.value('@' + name + ' ');
-                hdjs.scrollTo('body', '.content-comment', 10, {queue: true});
-                window.simpleMde.codemirror.on("change", function () {
-                    if (!/^@/.test(window.simpleMde.value())) {
-                        $("[name='parent_id']").val(0);
-                    }
-                });
-            });
-        }
-    </script>
-@endpush

@@ -22,6 +22,7 @@ class ContentController extends Controller
     }
 
     /**
+     * 发表评论
      * @param ContentRequest $request
      * @param UserServer $userServer
      * @return array|\Illuminate\Http\JsonResponse
@@ -35,20 +36,26 @@ class ContentController extends Controller
             $class = $request->input('comment_type');
             $model = (new $class)->find($request->input('comment_id'));
             $content = $request->input('comment_content');
-            $content = preg_replace('/^@(.+)\s+/', '', $content);
             $comment = $model->comments()->create([
                 'site_id' => \site()['id'],
                 'module_id' => \module()['id'],
-                'comment_content' => $content,
+                'comment_content' => $userServer->replaceName($content),
                 'parent_id' => $request->input('parent_id', 0),
                 'user_id' => auth()->id(),
             ]);
             $model->commentCreated();
-            $userServer->notify($model->user, '你有新的评论', $comment->getLink());
-
-            if($comment->parent_id){
-                $userServer->notify($comment->reply->user, '你有新的回复', $comment->reply->getLink());
+            //发送通知
+            $users = $userServer->getUsersFromContent($content);
+            array_push($users, $model->user->id);
+            if ($comment->parent_id > 0) {
+                array_push($users, $comment->reply->user->id);
             }
+            $userServer->notifyToMany(
+                User::whereIn('id', $users)->get(),
+                '你有新的回复',
+                $comment->getLink()
+            );
+
             return [
                 'message' => '评论发表成功',
                 'code' => 0,

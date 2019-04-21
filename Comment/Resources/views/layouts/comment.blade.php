@@ -42,13 +42,22 @@
 @endauth
 @push('js')
     <script>
+        function reply(name, user_id, comment_id) {
+            require(['hdjs'], function (hdjs) {
+                hdjs.scrollTo('body', '.content-comment', 10, {queue: true});
+                $("[name='parent_id']").val(comment_id);
+                window.simpleMde.value(window.simpleMde.value() + ' @' + name + ' ');
+            });
+        }
         //编辑器
         require(['hdjs', 'axios'], function (hdjs, axios) {
             hdjs.simplemdeMarkdownEditor('content', {}, function (simpleMde) {
                 window.simpleMde = simpleMde;
+                simpleMde.codemirror.on("change", function () {
+                    console.log(window.simpleMde.value());
+                });
             })
         });
-
         //发表评论
         function postComment() {
             require(['hdjs', 'axios'], function (hdjs, axios) {
@@ -63,6 +72,7 @@
                     $("#comments").append(response.data.view);
                     if (window.simpleMde) {
                         window.simpleMde.value('');
+                        $("[name='parent_id']").val(0);
                     }
                 }).catch(function (error) {
                     hdjs.swal({
