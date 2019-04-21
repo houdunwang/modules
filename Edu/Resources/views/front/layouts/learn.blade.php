@@ -1,7 +1,7 @@
 @inject('userVideoRepository','Modules\Edu\Repositories\UserVideoRepository')
 <div class="card rounded shadow-sm mb-2 component-learn">
     <div class="card-header bg-white">
-        <i class="fa fa-user"></i> 学习动态
+        <i class="fa fa-user-o"></i> 学习动态
     </div>
     <div class="card-body p-0">
         <div class="list-group list-group-flush">

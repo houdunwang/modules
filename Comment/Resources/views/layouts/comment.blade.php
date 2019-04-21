@@ -14,10 +14,10 @@
     </div>
 @endguest
 @auth
-    <form id="commentForm" action="{!! module_link('comment.front.content.store')!!}" method="post"
-          onsubmit="return post()">
+    <form id="commentForm" method="post" onsubmit="return postComment()">
         <input type="hidden" name="comment_type" value="{{get_class($model)}}">
         <input type="hidden" name="comment_id" value="{{$model['id']}}">
+        <input type="hidden" name="parent_id" value="0">
         @csrf
         <div class="card shadow-sm bg-white rounded">
             <div class="card-body p-0">
@@ -28,13 +28,6 @@
                 @else
                     <div class="content-comment">
                         <textarea style="display:none;height: 100px;" id="content" name="comment_content"></textarea>
-                        <script>
-                            require(['hdjs', 'axios'], function (hdjs, axios) {
-                                hdjs.simplemdeMarkdownEditor('content', {}, function (simpleMde) {
-                                    window.simpleMde = simpleMde;
-                                })
-                            });
-                        </script>
                     </div>
                 @endif
             </div>
@@ -47,6 +40,71 @@
         </div>
     </form>
 @endauth
+@push('js')
+    <script>
+        //编辑器
+        require(['hdjs', 'axios'], function (hdjs, axios) {
+            hdjs.simplemdeMarkdownEditor('content', {}, function (simpleMde) {
+                window.simpleMde = simpleMde;
+            })
+        });
+
+        //发表评论
+        function postComment() {
+            require(['hdjs', 'axios'], function (hdjs, axios) {
+                let action = "{!! module_link('comment.front.content.store')!!}";
+                axios.post(action, $("#commentForm").serialize()).then(function (response) {
+                    hdjs.swal({
+                        text: response.data.message,
+                        button: false,
+                        icon: 'success'
+                    });
+                    //添加评论
+                    $("#comments").append(response.data.view);
+                    if (window.simpleMde) {
+                        window.simpleMde.value('');
+                    }
+                }).catch(function (error) {
+                    hdjs.swal({
+                        text: error.response.data.message,
+                        button: false,
+                        icon: 'warning'
+                    });
+                });
+                return false;
+            });
+            return false;
+        }
+
+        //代码高亮
+        require(['hdjs', 'marked', 'MarkdownIt', 'highlight'], function (hdjs, marked, MarkdownIt) {
+            $('pre code').each(function (i, block) {
+                hljs.configure({useBR: false});
+                hljs.highlightBlock(block);
+            });
+        });
+
+        //评论点赞
+        function commentFavour(el, model, id) {
+            require(['hdjs', 'jquery', 'axios'], function (hdjs, $, axios) {
+                let action = "/member/favour/make/Modules-Comment-Entities-Content/" + id;
+                axios.get(action, {params: {}}).then(function (response) {
+                    if (response.data.action == 'add') {
+                        $(el).text($(el).text() * 1 + 1)
+                    } else {
+                        $(el).text($(el).text() * 1 - 1)
+                    }
+                }).catch(function (error) {
+                    hdjs.swal({
+                        text: error.response.data.errors,
+                        button: false,
+                        icon: 'warning'
+                    });
+                })
+            })
+        }
+    </script>
+@endpush
 <style>
     .content-comment {
         min-height: 300px;
@@ -66,59 +124,3 @@
         border-right: none;
     }
 </style>
-<script>
-    function post() {
-        require(['hdjs', 'axios'], function (hdjs, axios) {
-            let action = "{!! module_link('comment.front.content.store')!!}";
-            axios.post(action, $("#commentForm").serialize()).then(function (response) {
-                hdjs.swal({
-                    text: response.data.message,
-                    button: false,
-                    icon: 'success'
-                });
-                //添加评论
-                $("#comments").append(response.data.view);
-                if (window.simpleMde) {
-                    window.simpleMde.value('');
-                }
-            }).catch(function (error) {
-                hdjs.swal({
-                    text: error.response.data.message,
-                    button: false,
-                    icon: 'warning'
-                });
-            });
-            return false;
-        });
-        return false;
-    }
-</script>
-<script>
-    require(['hdjs', 'marked', 'MarkdownIt', 'highlight'], function (hdjs, marked, MarkdownIt) {
-        $('pre code').each(function (i, block) {
-            hljs.configure({useBR: false});
-            hljs.highlightBlock(block);
-        });
-    })
-</script>
-<script>
-    //评论点赞
-    function commentFavour(el, model, id) {
-        require(['hdjs', 'jquery', 'axios'], function (hdjs, $, axios) {
-            let action = "/member/favour/make/Modules-Comment-Entities-Content/" + id;
-            axios.get(action, {params: {}}).then(function (response) {
-                if (response.data.action == 'add') {
-                    $(el).text($(el).text() * 1 + 1)
-                } else {
-                    $(el).text($(el).text() * 1 - 1)
-                }
-            }).catch(function (error) {
-                hdjs.swal({
-                    text: error.response.data.errors,
-                    button: false,
-                    icon: 'warning'
-                });
-            })
-        })
-    }
-</script>

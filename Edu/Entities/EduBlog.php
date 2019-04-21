@@ -14,7 +14,7 @@ use Modules\Comment\Traits\Comment;
 class EduBlog extends Model
 {
     use Site, Comment;
-    protected $fillable = ['title', 'thumb', 'site_id', 'user_id', 'path'];
+    protected $fillable = ['title', 'site_id', 'user_id', 'path'];
 
     public function getTitle()
     {

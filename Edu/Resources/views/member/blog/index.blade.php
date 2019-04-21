@@ -3,15 +3,10 @@
     @include('edu::member.blog._tab')
     <div class="row">
         @foreach($blogs as $blog)
-            <div class="col-4">
+            <div class="col-4 mt-2">
                 <div class="card rounded shadow-sm">
-                    <div class="card-header">
+                    <div class="card-body text-center">
                         {{$blog['title']}}
-                    </div>
-                    <div class="card-body p-0">
-                        <a href="">
-                            <img src="{{$blog['thumb']}}" class="img-thumbnail p-0 border-0 rounded-0">
-                        </a>
                     </div>
                     <div class="card-footer text-center">
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">

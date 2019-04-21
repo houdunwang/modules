@@ -18,7 +18,7 @@ class Content extends Model
 {
     use Site, LogsActivity;
     protected $table = 'comment_contents';
-    protected $fillable = ['user_id', 'comment_content', 'site_id', 'module_id', 'favour_count'];
+    protected $fillable = ['user_id', 'comment_content', 'site_id', 'module_id', 'parent_id', 'favour_count'];
     protected static $logAttributes = ['title', 'author_id'];
     protected static $recordEvents = ['created'];
     protected static $logName = 'comment_content';
@@ -31,6 +31,11 @@ class Content extends Model
     public function getContentAttribute()
     {
         return \Parsedown::instance()->setBreaksEnabled(true)->text($this['comment_content']);
+    }
+
+    public function reply()
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
     }
 
     public function relation()

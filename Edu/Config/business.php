@@ -16,5 +16,10 @@
                 'url' => module_link('edu.admin.subscribe.index'),
                 'permission' => 'lesson-manage',
             ],
+            [
+                'title' => '广告推荐',
+                'url' => module_link('edu.admin.ad.index'),
+                'permission' => 'ad-manage',
+            ],
         ],
 ];

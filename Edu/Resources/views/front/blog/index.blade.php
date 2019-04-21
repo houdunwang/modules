@@ -21,14 +21,11 @@
             @foreach ($blogs as $blog)
                 <div class="col-sm-4 col-12 mt-2">
                     <a href="{{module_link('edu.front.blog.show',$blog)}}">
-                        <div class="bg-white shadow">
-{{--                            <div class="">--}}
-{{--                                <img src="{{$blog['thumb']}}" alt="" class="img-thumbnail p-0 border-0 rounded-0"--}}
-{{--                                     style="height: 200px;">--}}
-{{--                            </div>--}}
+                        <div class="bg-white shadow rounded">
                             <div class="p-3 mt-3">
-                                <h5 class="text-secondary mt-2">{{$blog['title']}}</h5>
-                                <div class="text-secondary small text-black-50">
+                                <h5 class="text-secondary mt-2 pb-3">{{$blog['title']}}</h5>
+                                <hr>
+                                <div class="text-secondary small text-black-50 pt-1">
                                     <i class="fa fa-user"></i>
                                     <a href="{{route('user.home',$blog->user)}}" class="mr-2">{{$blog->user->name}}</a>
                                     <i class="fa fa-clock-o"></i> {{$blog['created_at']->format('Y-m-d')}}

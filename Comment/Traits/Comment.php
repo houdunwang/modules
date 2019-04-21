@@ -19,7 +19,7 @@ trait Comment
      */
     public function comments()
     {
-        return $this->morphMany(Content::class, 'comment');
+        return $this->morphMany(Content::class, 'comment')->with('reply','user');
     }
 
     /**

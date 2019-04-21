@@ -14,5 +14,5 @@
   'home_pc' => '1',
   'space_pc' => '1',
   'space_mobile' => '1',
-  'version' => 1551880530,
+  'version' => 1554654926,
 );

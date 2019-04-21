@@ -15,7 +15,6 @@ class BlogRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'thumb' => 'required',
             'path' => 'required',
         ];
     }
@@ -24,7 +23,6 @@ class BlogRequest extends FormRequest
     {
         return [
             'title.required' => '标题不能为空',
-            'thumb.required' => '封面图片不能为空',
             'path.required' => '视频地址不能为空',
         ];
     }

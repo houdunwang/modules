@@ -19,7 +19,6 @@ class CreateEduBlogsTable extends Migration
             table_user_relation($table);
             $table->string('title', 100)->comment('标题');
             $table->unsignedInteger('comment_num')->nullable();
-            $table->string('thumb', 1000)->comment('封面图片');
             $table->string('path', 1000)->comment('播客地址');
             $table->timestamps();
         });

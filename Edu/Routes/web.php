@@ -13,6 +13,7 @@ Route::group([
     Route::resource('tag', 'TagController');
     Route::resource('lesson', 'LessonController');
     Route::resource('subscribe', 'SubscribeController');
+    Route::resource('ad', 'AdController');
 });
 /*
 |--------------------------------------------------------------------------
