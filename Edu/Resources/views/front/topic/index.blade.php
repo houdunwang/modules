@@ -6,20 +6,16 @@
                 <div class="p-3 pb-3 bg-white shadow-sm border-gray border rounded">
                     <h6 class="border-bottom pb-4 pt-3">
                         话题讨论
-{{--                        <a href="{{route('edu.front.topic.create')}}"--}}
-{{--                           class="btn btn-outline-secondary btn-sm float-right">--}}
-{{--                            发表--}}
-{{--                        </a>--}}
                     </h6>
                     <form action="{{module_link('edu.front.topic.search')}}" method="post">
                         @csrf
-                        <div class="input-group input-group">
+                        <div class="input-group input-group input-group-sm">
                             <input type="text" class="form-control" placeholder="" name="word"
                                    aria-label="Recipient's username with two button addons"
                                    aria-describedby="button-addon4">
                             <div class="input-group-append" id="button-addon4">
-                                <button class="btn btn-outline-info" type="submit">搜索</button>
-                                <a href="{{route('edu.front.topic.create')}}" class="btn btn-outline-success">发表</a>
+                                <button class="btn btn-outline-secondary" type="submit">搜索</button>
+                                <a href="{{route('edu.front.topic.create')}}" class="btn btn-outline-secondary">发表</a>
                             </div>
                         </div>
                     </form>

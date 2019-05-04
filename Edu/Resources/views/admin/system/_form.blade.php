@@ -1,11 +1,12 @@
 <input type="hidden" name="site_id" value="{{site()['id']}}">
+<input type="hidden" name="user_id" value="{{auth()->id()}}">
 <div class="card">
     <div class="card-header">
         设置资料
     </div>
     <div class="card-body">
         @foreach($fieldServer->forms($model) as $field)
-            {!! $field !!}
+        {!! $field !!}
         @endforeach
     </div>
 </div>

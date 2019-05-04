@@ -14,7 +14,8 @@
                                 <button class="btn btn-outline-secondary" type="submit" name="type" value="lesson">
                                     搜索课程
                                 </button>
-                                <button class="btn btn-outline-secondary" type="submit" name="type" value="video">搜索视频
+                                <button class="btn btn-outline-secondary" type="submit" name="type" value="video">
+                                    搜索视频
                                 </button>
                             </div>
                         </div>
@@ -34,10 +35,10 @@
 
                 </div>
             </div>
-            <div class="col-12 bg-white p-3 border rounded shadow-sm mt-3 lessons pt-3">
+            <div class="col-12 bg-light p-3 border rounded shadow-sm mt-3 lessons pt-3">
                 <div class="row">
                     @foreach($lessons as $lesson)
-                        <div class="col-12 col-sm-3">
+                        <div class="col-12 col-sm-4">
                             <div class="">
                                 @include('edu::front.layouts.lesson',$lesson)
                             </div>

@@ -30,7 +30,7 @@ class Content extends Model
 
     public function getContentAttribute()
     {
-        return \Parsedown::instance()->setBreaksEnabled(true)->text($this['comment_content']);
+        return clean(\Parsedown::instance()->setBreaksEnabled(true)->text($this['comment_content']));
     }
 
     public function reply()

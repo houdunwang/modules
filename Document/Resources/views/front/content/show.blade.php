@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="markdown">
-                    {!! \Parsedown::instance()->setBreaksEnabled(true)->text($content['markdown']) !!}
+                    {!! clean(\Parsedown::instance()->setBreaksEnabled(true)->text($content['markdown'])) !!}
                 </div>
                 <div class="">
                     @include('components.favour',['model'=>$content,'avatar'=>true])

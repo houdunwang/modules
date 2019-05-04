@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Edu\Entities\EduLesson;
 use Modules\Edu\Entities\EduTag;
-use Modules\Edu\Entities\EduVideo;
 use Modules\Edu\Repositories\LessonRepository;
 use Modules\Edu\Repositories\VideoRepository;
 

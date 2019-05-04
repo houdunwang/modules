@@ -9,9 +9,9 @@
             <div class="col-12 col-sm-9 p-0">
                 <div class="bg-white p-sm-5 p-3 rounded shadow-sm border shadow-sm">
                     <div class="mb-3 pb-3">
-                        <h3 class="pb-1 pt-3 mb-3 text-monospace text-black-50">
+                        <h4 class="pb-1 pt-3 mb-3 text-monospace text-black-50">
                             {{$lesson['title']}}
-                        </h3>
+                        </h4>
                         <div class="small text-secondary clearfix">
                             <div class="">
                                 <div class="btn-group btn-group-sm">
@@ -46,13 +46,6 @@
                                             推荐
                                         </a>
                                     @endcan
-                                    {{--                                    @if ($lesson->download_address)--}}
-                                    {{--                                        @include('edu::front.layouts.download',['lesson'=>$lesson])--}}
-                                    {{--                                        <a href="" class="btn btn-outline-info"--}}
-                                    {{--                                           data-toggle="modal" data-target="#downloadModal">--}}
-                                    {{--                                            下载高清版--}}
-                                    {{--                                        </a>--}}
-                                    {{--                                    @endif--}}
                                 </div>
                                 @include('components.favorite',['model'=>$lesson])
                             </div>

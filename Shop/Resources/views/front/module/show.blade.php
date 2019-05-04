@@ -52,9 +52,9 @@
                     <div class="card-header">
                         详细介绍
                     </div>
-                    <div class="card-body">
+                    <div class="card-body markdown">
                         @if ($module['content'])
-                            {!! $module['content']  !!}
+                            {!! \Parsedown::instance()->setBreaksEnabled(true)->text($module['content']) !!}
                         @else
                             <span class="text-secondary">暂无介绍</span>
                         @endif
@@ -94,11 +94,10 @@
 @stop
 @push('js')
     <script>
-        require(['bootstrap'], function () {
-            $(function () {
-                $('[data-toggle="popover"]').popover({
-                    trigger: 'hover'
-                })
+        require(['hdjs', 'marked', 'MarkdownIt', 'highlight'], function (hdjs, marked, MarkdownIt) {
+            $('pre code').each(function (i, block) {
+                hljs.configure({useBR: false});
+                hljs.highlightBlock(block);
             });
         })
     </script>

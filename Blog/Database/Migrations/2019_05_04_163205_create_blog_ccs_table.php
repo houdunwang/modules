@@ -4,15 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEduAdsTable extends Migration
+class CreateBlogCcsTable extends Migration
 {
     public function up()
     {
-        Schema::create('edu_ads', function (Blueprint $table) {
+        Schema::create('blog_ccs', function (Blueprint $table) {
             $table->increments('id');
             table_site_relation($table);
-            $table->string('title')->comment('标题');
-$table->string('url')->comment('跳转链接');
+            $table->string('title',100)->comment('标题');
 
             $table->timestamps();
         });
@@ -20,6 +19,6 @@ $table->string('url')->comment('跳转链接');
 
     public function down()
     {
-        Schema::dropIfExists('edu_ads');
+        Schema::dropIfExists('blog_ccs');
     }
 }

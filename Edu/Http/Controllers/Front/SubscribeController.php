@@ -29,7 +29,7 @@ class SubscribeController extends Controller
     public function index()
     {
         $subscribes = EduSubscribe::get();
-        return view('edu::fro=nt.subscribe.index', compact('subscribes'));
+        return view('edu::front.subscribe.index', compact('subscribes'));
     }
 
     /**

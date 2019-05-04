@@ -5,7 +5,7 @@
     </div>
     <div class="card-body p-0">
         <div class="list-group list-group-flush">
-            @foreach($userVideoRepository->paginate(8,['*'],'id') as $log)
+            @foreach($userVideoRepository->paginate(12,['*'],'id') as $log)
                 <div class="list-group-item ">
                     <div class="row">
                         <div class="col-sm-3 col-3 pr-0">

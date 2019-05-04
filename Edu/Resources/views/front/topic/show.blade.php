@@ -6,9 +6,9 @@
             <div class="col-12 col-sm-9 p-0">
                 <div class="bg-white p-sm-5 p-3 rounded shadow-sm border border-gary shadow-sm">
                     <div class="border-bottom mb-3 pb-3">
-                        <h3 class="pb-1 pt-3 mb-3 text-monospace text-black-50">
+                        <h4 class="pb-1 pt-3 mb-3 text-monospace text-black-50">
                             {{$topic['title']}}
-                        </h3>
+                        </h4>
                         <div class="small text-secondary clearfix">
                             <div class="float-left pt-2">
                                 创建于{{$topic->created_at->diffForHumans()}} <span class="pr-2 pl-2">/</span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="text-black-50 content-markdown markdown bg-white">
-                        {!! \Parsedown::instance()->setBreaksEnabled(true)->text($topic['content']) !!}
+                        {!! clean(\Parsedown::instance()->setBreaksEnabled(true)->text($topic['content'])) !!}
                     </div>
                     @include('components.favour',['model'=>$topic,'avatar'=>true])
                 </div>

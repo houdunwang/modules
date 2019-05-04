@@ -11,7 +11,8 @@ class CreateBlogAasTable extends Migration
         Schema::create('blog_aas', function (Blueprint $table) {
             $table->increments('id');
             table_site_relation($table);
-            
+            $table->string('aa',100)->comment('sdf');
+
             $table->timestamps();
         });
     }

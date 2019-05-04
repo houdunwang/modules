@@ -21,5 +21,11 @@
                 'url' => module_link('edu.admin.ad.index'),
                 'permission' => 'ad-manage',
             ],
+            [
+                'title' => '系统课程',
+                'url' => module_link('edu.admin.system.index'),
+                'permission' => 'system-manage',
+            ]
         ],
+
 ];

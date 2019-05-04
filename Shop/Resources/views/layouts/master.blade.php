@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>{{config_get('info.webname','','site')}}</title>
     <link rel="stylesheet" href="{{asset('modules/shop/css/app.css')}}?v={{\module()['version']}}">
+    <link rel="stylesheet" href="{{mix('css/app.css')}}">
     @include('layouts.hdjs')
     @stack('css')
 </head>

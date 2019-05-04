@@ -46,7 +46,7 @@
             </div>
             <div class="col-sm-3 col-12 pl-sm-2 p-0">
                 @include('edu::front.layouts.tip')
-                @include('edu::front.layouts.ad')
+{{--                @include('edu::front.layouts.ad')--}}
                 @include('edu::front.layouts.learn')
             </div>
         </div>

@@ -14,7 +14,7 @@
                         <li class="nav-item dropdown mr-3">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                系统课程
+                                课程
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach(\Modules\Edu\Entities\EduLesson::type('system')->get() as $lesson)
@@ -26,27 +26,23 @@
                         </li>
                         <li class="nav-item mr-3">
                             <a class="nav-link {{active_class(if_route_pattern('shop.front.log.index'),'active')}}"
-                               href="{{module_link('edu.front.lesson.index')}}">项目实战</a>
+                               href="{{module_link('edu.front.lesson.index')}}">项目</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a class="nav-link {{active_class(if_route_pattern('edu.front.video.index'),'active')}}"
-                               href="{{module_link('edu.front.video.index')}}">更新列表</a>
-                        </li>
-                        <li class="nav-item mr-3">
-                            <a class="nav-link " href="{{route('edu.front.subscribe.index')}}">订阅会员</a>
+                            <a class="nav-link " href="{{route('edu.front.subscribe.index')}}">订阅</a>
                         </li>
                         <li class="nav-item mr-3">
                             <a class="nav-link {{active_class(if_route_pattern('edu.front.topic.*'))}}"
-                               href="{{route('edu.front.topic.index')}}">话题讨论</a>
+                               href="{{route('edu.front.topic.index')}}">话题</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a class="nav-link " href="{{route('edu.front.sign.index')}}">会员签到</a>
+                            <a class="nav-link " href="{{route('edu.front.sign.index')}}">签到</a>
                         </li>
                         @if (module_exists('Document'))
                             <li class="nav-item dropdown mr-3">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    在线文档
+                                    文档
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @inject('articleRepository','Modules\Document\Repositories\ArticleRepository')
@@ -63,9 +59,12 @@
                         <li class="nav-item dropdown mr-3">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                其他功能
+                                其他
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"
+                                   href="{{module_link('edu.front.video.index')}}">更新列表</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{module_link('edu.front.blog.index')}}">视频日记</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('edu.front.live.index')}}">八点直播</a>

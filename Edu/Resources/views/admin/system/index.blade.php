@@ -1,12 +1,13 @@
 @extends('layouts.module')
 @section('content')
-@include('blog::admin.article._tab')
+@include('edu::admin.system._tab')
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
+                        <th>编号</th>
                         @foreach($fieldServer->titles() as $title)
                         <th>{{$title}}</th>
                         @endforeach
@@ -16,16 +17,17 @@
                 <tbody>
                     @foreach($data as $field)
                     <tr>
+                        <td>{{ $field['id'] }}</td>
                         @foreach ($fieldServer->value($field) as $value)
                         <td>{!!$value!!}</td>
                         @endforeach
                         <td class="text-right">
                             <div class="btn-group btn-group-sm">
                                 <a class="btn btn-outline-success"
-                                    href="{{module_link('blog.admin.article.edit',$field)}}">
+                                    href="{{module_link('edu.admin.system.edit',$field)}}">
                                     编辑
                                 </a>
-                                <form action="{{module_link('blog.admin.article.destroy',$field)}}" method="post">
+                                <form action="{{module_link('edu.admin.system.destroy',$field)}}" method="post">
                                     @csrf @method('DELETE')
                                 </form>
                                 <a class="btn btn-outline-danger" href="javascript:;" onclick="destroy(this)">

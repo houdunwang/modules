@@ -6,29 +6,38 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Blog\Entities\BlogAa;
 use Modules\Blog\Repositories\AaRepository;
-
+use App\Servers\FieldServer;
 class AaController extends Controller
 {
-    public function index(AaRepository $repository)
+    protected function getFieldServer()
     {
-        $data = $repository->paginate(10);
-        return view('blog::admin.aa.index', compact('data'));
+        return app(FieldServer::class)->init(module(), 'BlogAa');
     }
 
-    public function create()
+    public function index(AaRepository $repository)
     {
-        return view('blog::admin.content.create');
+        $fieldServer = $this->getFieldServer();
+        $data = $repository->paginate(10);
+        return view('blog::admin.aa.index', compact('data','fieldServer'));
+    }
+
+    public function create(BlogAa $model)
+    {
+        $fieldServer = $this->getFieldServer();
+        return view('blog::admin.aa.create',compact('model','fieldServer'));
     }
 
     public function store(Request $request, AaRepository $repository)
     {
         $repository->create($request->input());
-        return redirect(module_link('article.admin.aa.index'))->with('success', '添加完成');
+        return redirect(module_link('blog.admin.aa.index'))->with('success', '添加完成');
     }
 
     public function edit(BlogAa $aa)
     {
-        return view('blog::admin.aa.edit', ['field'=>$aa]);
+        $fieldServer = $this->getFieldServer();
+        return view('blog::admin.aa.edit',
+        ['model' => $aa, 'fieldServer' => $fieldServer]);
     }
 
     public function update(Request $request, BlogAa $aa, AaRepository $repository)
@@ -37,9 +46,9 @@ class AaController extends Controller
         return redirect(module_link('blog.admin.aa.index'))->with('success', '修改成功');
     }
 
-    public function destroy(BlogAa $aa)
+    public function destroy(BlogAa $aa,AaRepository $repository)
     {
-        $aa->delete();
+        $repository->delete($aa);
         return redirect(module_link('blog.admin.aa.index'))->with('success', '删除成功');
     }
 }

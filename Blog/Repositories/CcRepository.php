@@ -10,9 +10,9 @@
 namespace Modules\Blog\Repositories;
 
 use App\Repositories\Repository;
-use Modules\Blog\Entities\BlogArticle;
+use Modules\Blog\Entities\BlogCc;
 
-class ArticleRepository extends Repository
+class CcRepository extends Repository
 {
-    protected $model = BlogArticle::class;
+    protected $model = BlogCc::class;
 }

@@ -14,6 +14,7 @@ Route::group([
     Route::resource('lesson', 'LessonController');
     Route::resource('subscribe', 'SubscribeController');
     Route::resource('ad', 'AdController');
+    Route::resource('system', 'SystemController');
 });
 /*
 |--------------------------------------------------------------------------
