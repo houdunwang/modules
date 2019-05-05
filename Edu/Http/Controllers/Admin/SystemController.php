@@ -31,7 +31,7 @@ class SystemController extends Controller
     public function store(Request $request, SystemRepository $repository)
     {
         $model = $repository->create($request->input());
-        $model->lessons()->sync(explode(',', $request->input('lessons')));
+        $model->lesson()->sync(explode(',', $request->input('lessons')));
         return redirect(module_link('edu.admin.system.index'))->with('success', '添加完成');
     }
 
@@ -47,7 +47,7 @@ class SystemController extends Controller
     public function update(Request $request, EduSystem $system, SystemRepository $repository)
     {
         $repository->update($system, $request->input());
-        $system->lessons()->sync(explode(',', $request->input('lessons')));
+        $system->lesson()->sync(explode(',', $request->input('lessons')));
         return redirect(module_link('edu.admin.system.index'))->with('success', '修改成功');
     }
 

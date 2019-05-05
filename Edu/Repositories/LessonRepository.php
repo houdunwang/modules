@@ -14,6 +14,7 @@ namespace Modules\Edu\Repositories;
 use Modules\Edu\Entities\EduLesson;
 use App\Repositories\Repository;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Edu\Entities\EduSystem;
 
 /**
  * 课程
@@ -107,5 +108,16 @@ class LessonRepository extends Repository
     public function news($row = 5)
     {
         return $this->instance->limit($row)->latest()->get();
+    }
+    /**
+     * 获取系统课程
+     *
+     * @param integer $row
+     * @return void
+     */
+    public function getSystemLesson(int $row = 3)
+    {
+        $lesson = new EduSystem();
+        return $lesson->where('site_id', \site()['id'])->limit($row)->latest('id')->get();
     }
 }

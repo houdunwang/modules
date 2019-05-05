@@ -1,8 +1,8 @@
-{{--后台发表课程--}} 
+{{--后台发表课程--}}
 @inject('TagRepository','Modules\Edu\Repositories\TagRepository')
 <div class="row">
     <div class="col-12" id="app" v-cloak="">
-    @include('edu::admin.lesson._tab')
+        @include('edu::admin.lesson._tab')
         <div class="card">
             <div class="card-header">基本信息</div>
             <div class="card-body border-bottom-0">
@@ -17,8 +17,7 @@
                     <div class="col-sm-10">
                         @foreach($TagRepository->all() as $tag)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="tags[]" {{active_class($lesson->hasTag($tag),'checked')}}
-                            value="{{$tag['id']}}" type="checkbox" id="tag{{$tag['id']}}">
+                            <input class="form-check-input" name="tags[]" {{active_class($lesson->hasTag($tag),'checked')}} value="{{$tag['id']}}" type="checkbox" id="tag{{$tag['id']}}">
                             <label class="form-check-label" for="tag{{$tag['id']}}">{{$tag['name']}}</label>
                         </div>
                         @endforeach
@@ -94,7 +93,7 @@
                 <div class="card mb-2">
                     <div class="card-header">
                         下载设置
-                    </d iv>
+                    </div>
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="col-sm-2">只允许下载</label>
@@ -119,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card mt-2">
                     <div class="card-header">
                         收费课程设置
                     </div>
@@ -199,8 +198,7 @@
                                 </button>
                                 <button class="btn btn-secondary btn-sm" type="button" @click="addNextVideo(k)">插入视频
                                 </button> {{--考题--}}
-                                <div class="modal fade bd-example-modal-lg" :id="'question'+k" tabindex="-1" role="dialog" aria-labelledby="video.question"
-                                    aria-hidden="true">
+                                <div class="modal fade bd-example-modal-lg" :id="'question'+k" tabindex="-1" role="dialog" aria-labelledby="video.question" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -271,51 +269,69 @@
 </div>
 @push('js')
 <script>
-    require(['vue', 'hdjs', 'vuedraggable'], function (Vue, hdjs, draggable) {
-            new Vue({
-                el: "#app",
-                components: {
-                    draggable: draggable
+    require(['vue', 'hdjs', 'vuedraggable'], function(Vue, hdjs, draggable) {
+        new Vue({
+            el: "#app",
+            components: {
+                draggable: draggable
+            },
+            data: {
+                videos: <?php echo json_encode($lesson->video()->orderBy('rank', 'ASC')->get()->toArray()); ?>,
+                editLessonVideo: false,
+            },
+            methods: {
+                addVideo() {
+                    this.videos.push({
+                        title: '',
+                        path: '',
+                        duration: 0,
+                        question: []
+                    })
                 },
-                data: {
-                    videos: {!! json_encode($lesson->video()->orderBy('rank','ASC')->get()->toArray()) !!},
-                    editLessonVideo: false,
+                addNextVideo(k) {
+                    this.videos.splice(k, 0, {
+                        title: '',
+                        path: '',
+                        duration: 0,
+                        question: []
+                    })
                 },
-                methods: {
-                    addVideo() {
-                        this.videos.push({title: '', path: '', duration: 0, question: []})
-                    },
-                    addNextVideo(k) {
-                        this.videos.splice(k, 0, {title: '', path: '', duration: 0, question: []})
-                    },
-                    delVideo(index) {
-                        hdjs.confirm('确定删除吗？', () => {
-                            this.videos.splice(index, 1)
-                        })
-                    },
-                    //问题
-                    question_show(video) {
-                        video.question = video.question ? video.question : [];
-                    },
-                    question_add(video) {
-                        video.question.push({title: '', topics: [{topic: '', right: false}]});
-                    },
-                    question_del(video, k) {
-                        hdjs.confirm('确定删除这个问题吗', () => {
-                            video.question.splice(k, 1);
-                        })
-                    },
-                    //答案
-                    topic_add(topics) {
-                        topics.push({topic: '', right: false})
-                    },
-                    topic_del(topics, k) {
-                        topics.splice(k, 1);
-                    }
+                delVideo(index) {
+                    hdjs.confirm('确定删除吗？', () => {
+                        this.videos.splice(index, 1)
+                    })
+                },
+                //问题
+                question_show(video) {
+                    video.question = video.question ? video.question : [];
+                },
+                question_add(video) {
+                    video.question.push({
+                        title: '',
+                        topics: [{
+                            topic: '',
+                            right: false
+                        }]
+                    });
+                },
+                question_del(video, k) {
+                    hdjs.confirm('确定删除这个问题吗', () => {
+                        video.question.splice(k, 1);
+                    })
+                },
+                //答案
+                topic_add(topics) {
+                    topics.push({
+                        topic: '',
+                        right: false
+                    })
+                },
+                topic_del(topics, k) {
+                    topics.splice(k, 1);
                 }
-            })
+            }
         })
-
+    })
 </script>
 
 

@@ -63,6 +63,8 @@ Route::group([
     Route::resource('subscribe', 'SubscribeController');
     //视频播客
     Route::resource('blog', 'BlogController')->middleware(['auth']);
+    //课程主页
+    Route::resource('system', 'SystemController')->middleware([]);
 });
 
 /*

@@ -14,7 +14,7 @@ class EduSystem extends Model
     use Site;
     protected $fillable = ['site_id', 'title', 'introduce', 'lessons', 'thumb', 'user_id'];
 
-    public function lessons()
+    public function lesson()
     {
         return $this->belongsToMany('Modules\Edu\Entities\EduLesson', 'edu_system_lesson', 'system_id', 'lesson_id');
     }
